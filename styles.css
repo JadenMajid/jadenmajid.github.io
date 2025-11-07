@@ -524,6 +524,15 @@ body::after,
     transition: transform 0.5s ease;
 }
 
+/* Ensure embedded PDFs or objects fill the project thumbnail area */
+.project-image object,
+.project-image embed,
+.project-image iframe {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
 .project-card:hover .project-image img {
     transform: scale(1.1);
 }
