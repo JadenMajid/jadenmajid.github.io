@@ -37,6 +37,12 @@ body {
     position: relative;
 }
 
+video {
+  width: 100%;       /* Make the video element fill 100% of the container's width */
+  height: 100%;      /* Make the video element fill 100% of the container's height */
+  object-fit: cover; /* Crucially, this ensures the video covers the space while maintaining its aspect ratio */
+}
+
 /* Remove layered decorative backgrounds — use a single static color */
 body::before,
 body::after,
