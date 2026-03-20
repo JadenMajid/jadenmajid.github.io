@@ -33,6 +33,11 @@
             <div class="icon-img">🗺️</div>
             <span>Map.exe</span>
         </div>
+        <div class="desktop-icon"
+            onclick="window.open('https://jmajid.com/pdfs/JadenMajid_CV_2026_03_19.pdf', '_blank', 'noopener,noreferrer')">
+            <div class="icon-img">📘</div>
+            <span>CV.pdf</span>
+        </div>
         <div class="desktop-icon" id="theme-toggle">
             <div class="icon-img">⚙️</div>
             <span id="theme-label">Light_Mode.exe</span>
@@ -54,8 +59,8 @@
                 <h1 class="pixel-text large">JADEN MAJID</h1>
                 <br>
                 <br>
-                <p>I am a computer science major at UBC Vancouver in my penultimate year.<br>I specialize in <b>SWE</b>
-                    and <b>Machine Learning / AI</b>.</p>
+                <p>I am a computer science major at UBC Vancouver in my penultimate year; interested in SWE
+                    and Machine Learning / AI.</p>
                 <br>
                 <br>
                 <div class="field-row">
@@ -192,10 +197,8 @@
                         }
                     }
 
-                    const globeRoutePath = svgGlobe.append("path")
-                        .style("fill", "none")
-                        .style("stroke", "#ff00ff")
-                        .style("stroke-width", "2")
+                    const globeRouteLayer = svgGlobe.append("g")
+                        .attr("class", "route-trail-layer")
                         .style("filter", "url(#glow)");
 
                     const cityGroups = svgGlobe.selectAll(".city-node")
@@ -233,7 +236,7 @@
                     function renderGlobe() {
                         gridGlobe.attr("d", geoPathGenerator);
                         if (landPathGlobe.datum()) landPathGlobe.attr("d", geoPathGenerator);
-                        globeRoutePath.attr("d", geoPathGenerator);
+                        globeRouteLayer.selectAll("path").attr("d", geoPathGenerator);
 
                         cityGroups.attr("transform", d => {
                             const p = projectionParams(d.coords);
@@ -273,14 +276,33 @@
                         }
 
                         // Data-driven path animation
-                        trailHeadIdx += dt * 0.08;
+                        trailHeadIdx += dt * 0.0528;
                         if (trailHeadIdx >= detailedCoords.length) trailHeadIdx = 0;
 
                         const startIdx = Math.max(0, Math.floor(trailHeadIdx) - trailLength);
                         const endIdx = Math.floor(trailHeadIdx);
                         const currentTrail = detailedCoords.slice(startIdx, endIdx + 1);
 
-                        globeRoutePath.datum({ type: "LineString", coordinates: currentTrail });
+                        const trailSegments = [];
+                        for (let i = 0; i < currentTrail.length - 1; i++) {
+                            const progress = (i + 1) / (currentTrail.length - 1);
+                            trailSegments.push({
+                                type: "LineString",
+                                coordinates: [currentTrail[i], currentTrail[i + 1]],
+                                opacity: Math.max(0.08, Math.pow(progress, 1.8)),
+                                width: 0.8 + progress * 2.2
+                            });
+                        }
+
+                        globeRouteLayer.selectAll("path")
+                            .data(trailSegments)
+                            .join("path")
+                            .style("fill", "none")
+                            .style("stroke", "#ff00ff")
+                            .style("stroke-linecap", "round")
+                            .style("stroke-opacity", d => d.opacity)
+                            .style("stroke-width", d => d.width)
+                            .attr("d", geoPathGenerator);
 
                         renderGlobe();
                     });
