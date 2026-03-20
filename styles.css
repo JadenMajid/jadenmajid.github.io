@@ -281,6 +281,31 @@ body.light-mode .file-item {
     image-rendering: auto;
 }
 
+.project-date {
+    margin: 0.25rem 0 0.5rem;
+    opacity: 0.8;
+}
+
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-bottom: 0.7rem;
+}
+
+.tech-tag {
+    display: inline-block;
+    padding: 0.12rem 0.45rem;
+    border: 1px solid var(--win-border-dark);
+    background: var(--btn-bg);
+    font-size: 1rem;
+    line-height: 1.1;
+}
+
+body.light-mode .tech-tag {
+    background: #e9e9e9;
+}
+
 /* Experiences / Notepad Style */
 .white-bg {
     background: #fff;
