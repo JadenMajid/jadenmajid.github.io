@@ -184,6 +184,8 @@ body.dark-mode .title-bar {
     padding: 1.5rem;
     overflow-y: auto;
     flex-grow: 1;
+    scrollbar-width: auto;
+    scrollbar-color: var(--btn-bg) var(--win-border-dark);
 }
 
 .window-body.no-pad {

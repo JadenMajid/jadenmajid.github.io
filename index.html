@@ -74,7 +74,6 @@
                 <div class="title-bar-text">Map.exe</div>
                 <div class="title-bar-controls">
                     <button aria-label="Minimize" onclick="minWindow('win-map')">_</button>
-                    <button aria-label="Maximize" onclick="maxWindow('win-map')">[]</button>
                     <button aria-label="Close" onclick="closeWindow('win-map')">X</button>
                 </div>
             </div>
@@ -163,7 +162,7 @@
                         { name: "TAIWAN - First Time Surfing", coords: [120.9605, 23.6978], type: "gold" },
                         { name: "DOLOMITES - Best Ski Weather", coords: [11.7049, 46.5598], type: "gold" },
                         { name: "THUNDER RIDGE - First Ski Spot", coords: [-73.5818, 41.5081], type: "gold" },
-                        { name: "KIPAWA LAKE - 22 Day Canoe Trip", coords: [-78.9667, 46.9667], type: "gold" }
+                        { name: "KIPAWA - 22 Day Canoe Trip", coords: [-78.9667, 46.9667], type: "gold" }
                     ];
 
                     const globeRouteCoords = [
@@ -595,12 +594,6 @@
             document.getElementById(id).style.display = 'none';
             const task = document.getElementById("task-" + id.replace("win-", ""));
             if (task) task.classList.remove("active");
-        }
-
-        function maxWindow(id) {
-            const win = document.getElementById(id);
-            win.classList.toggle("maximized");
-            bringToFront(id);
         }
 
         function closeWindow(id) {
