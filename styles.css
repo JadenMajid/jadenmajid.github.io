@@ -192,6 +192,12 @@ body.dark-mode .title-bar {
     padding: 0;
 }
 
+.field-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
 .pad-content {
     padding: 1rem;
 }
@@ -448,6 +454,176 @@ body.dark-mode .task-item.active {
 
     .exp-item {
         flex-direction: column;
+    }
+}
+
+@media (max-width: 1024px) {
+    body {
+        overflow-x: hidden;
+        overflow-y: auto;
+        min-height: 100vh;
+        height: auto;
+    }
+
+    .os-container {
+        height: auto;
+        min-height: calc(100vh - 40px);
+        overflow: visible;
+        padding: 120px 0.75rem 0.75rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .desktop-icons {
+        top: 8px;
+        left: 8px;
+        right: 8px;
+        width: calc(100% - 16px);
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .desktop-icon {
+        width: 72px;
+    }
+
+    .desktop-icon span {
+        font-size: 0.9rem;
+        line-height: 1;
+    }
+
+    .os-window {
+        position: relative;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        max-height: none;
+        min-height: 200px;
+        margin: 0;
+    }
+
+    .window-body {
+        padding: 1rem;
+    }
+
+    .map-container {
+        height: 360px !important;
+    }
+
+    .taskbar {
+        height: 42px;
+    }
+
+    .start-btn {
+        margin-right: 8px;
+        padding: 2px 6px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hide-on-mobile {
+        display: none !important;
+    }
+
+    body {
+        font-size: 1rem;
+    }
+
+    .large {
+        font-size: 2.25rem;
+    }
+
+    .mid {
+        font-size: 1.4rem;
+    }
+
+    .os-btn {
+        font-size: 1.05rem;
+        padding: 0.45rem 0.9rem;
+    }
+
+    .window-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 0.75rem;
+    }
+
+    .pixel-img {
+        height: 180px;
+    }
+
+    .exp-item img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .task-item {
+        max-width: 130px;
+        font-size: 1rem;
+    }
+
+    .taskbar-time {
+        padding: 4px 6px;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .os-container {
+        padding-top: 136px;
+    }
+
+    .desktop-icons {
+        gap: 8px;
+    }
+
+    .desktop-icon {
+        width: 62px;
+    }
+
+    .icon-img {
+        font-size: 2rem;
+    }
+
+    .desktop-icon span {
+        font-size: 0.8rem;
+    }
+
+    .title-bar-text {
+        font-size: 1rem;
+    }
+
+    .window-body {
+        padding: 0.75rem;
+    }
+
+    .map-container {
+        height: 260px !important;
+    }
+
+    .taskbar {
+        padding: 0 2px;
+    }
+
+    .start-btn {
+        margin-right: 4px;
+        font-size: 0.95rem;
+    }
+
+    .task-item {
+        max-width: 105px;
+        padding: 4px 6px;
+        font-size: 0.9rem;
+    }
+
+    .taskbar-time {
+        font-size: 0.85rem;
+        padding: 4px;
     }
 }
 
