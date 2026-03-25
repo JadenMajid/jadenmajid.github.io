@@ -74,7 +74,7 @@
         </div>
 
         <!-- Map Window -->
-        <div class="os-window hide-on-mobile" id="win-map" style="width: 800px; max-width: 90vw; top: 100px; left: calc(50vw + 10px);">
+        <div class="os-window hide-on-mobile" id="win-map" style="width: 640px; height: 520px; max-width: 90vw; top: 100px; left: calc(50vw + 10px);">
             <div class="title-bar">
                 <div class="title-bar-text">Map.exe</div>
                 <div class="title-bar-controls">
@@ -85,7 +85,7 @@
             <div class="window-body"
                 style="padding: 1rem; background: var(--win-bg); display: flex; flex-direction: column; align-items: center; justify-content: center;">
                 <div class="map-container"
-                    style="position: relative; width: 100%; height: 500px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; background: #000; overflow: hidden; border: 2px solid var(--win-border-dark);">
+                    style="position: relative; width: 100%; height: clamp(260px, 56vh, 500px); margin-bottom: 20px; display: flex; align-items: center; justify-content: center; background: #000; overflow: hidden; border: 2px solid var(--win-border-dark);">
                     <button id="toggle-rotation" class="os-btn"
                         style="position: absolute; top: 10px; right: 10px; z-index: 100;">Pause Rotation</button>
                     <svg id="globe-svg" width="100%" height="100%" viewBox="0 0 640 640" style="cursor: grab;">
@@ -647,12 +647,66 @@
             return window.matchMedia('(max-width: 768px)').matches;
         }
 
+        function setInitialWindowLayout() {
+            if (isMobileViewport()) return;
+
+            const profile = document.getElementById('win-profile');
+            const map = document.getElementById('win-map');
+            if (!profile || !map) return;
+
+            const taskbarHeight = document.querySelector('.taskbar')?.offsetHeight || 40;
+            const vw = window.innerWidth;
+            const vh = window.innerHeight - taskbarHeight;
+
+            const profileWidth = Math.min(460, Math.max(360, Math.floor(vw * 0.38)));
+            profile.style.width = profileWidth + 'px';
+            profile.style.height = 'auto';
+            profile.style.top = '96px';
+            profile.style.left = Math.max(12, Math.floor(vw * 0.5) - profileWidth - 16) + 'px';
+
+            const mapWidth = Math.min(640, Math.max(440, Math.floor(vw * 0.45)));
+            const mapHeight = Math.min(560, Math.max(380, Math.floor(vh * 0.62)));
+            map.style.width = mapWidth + 'px';
+            map.style.height = mapHeight + 'px';
+
+            const profileRect = profile.getBoundingClientRect();
+            const preferredLeft = Math.round(profileRect.right + 16);
+            const fitsRight = preferredLeft + mapWidth <= vw - 12;
+
+            if (fitsRight) {
+                map.style.left = preferredLeft + 'px';
+                map.style.top = '96px';
+            } else {
+                map.style.left = Math.max(12, Math.floor((vw - mapWidth) / 2)) + 'px';
+                map.style.top = Math.round(profileRect.bottom + 14) + 'px';
+            }
+        }
+
+        function clampWindowToViewport(win) {
+            if (!win || isMobileViewport()) return;
+
+            const taskbarHeight = document.querySelector('.taskbar')?.offsetHeight || 40;
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight - taskbarHeight;
+
+            const rect = win.getBoundingClientRect();
+            const maxLeft = Math.max(0, viewportWidth - rect.width);
+            const maxTop = Math.max(0, viewportHeight - rect.height);
+
+            const boundedLeft = Math.min(Math.max(rect.left, 0), maxLeft);
+            const boundedTop = Math.min(Math.max(rect.top, 0), maxTop);
+
+            win.style.left = boundedLeft + 'px';
+            win.style.top = boundedTop + 'px';
+        }
+
         function bringToFront(id) {
             highestZ++;
             const win = document.getElementById(id);
             if (win) {
                 win.style.zIndex = highestZ;
                 win.style.display = 'flex';
+                clampWindowToViewport(win);
             }
 
             // Update taskbar visibility and active state
@@ -725,6 +779,7 @@
 
                 function onMouseMove(event) {
                     moveAt(event.pageX, event.pageY);
+                    clampWindowToViewport(win);
                 }
 
                 document.addEventListener('mousemove', onMouseMove);
@@ -732,16 +787,30 @@
                 document.onmouseup = function () {
                     document.removeEventListener('mousemove', onMouseMove);
                     document.onmouseup = null;
+                    clampWindowToViewport(win);
                 };
             });
             titleBar.ondragstart = function () { return false; };
         });
 
+        window.addEventListener('resize', () => {
+            document.querySelectorAll('.os-window').forEach(clampWindowToViewport);
+        });
+
+        if (window.ResizeObserver) {
+            const windowResizeObserver = new ResizeObserver((entries) => {
+                entries.forEach(entry => clampWindowToViewport(entry.target));
+            });
+            document.querySelectorAll('.os-window').forEach(win => windowResizeObserver.observe(win));
+        }
+
         // Initial setup
+        setInitialWindowLayout();
         bringToFront('win-profile');
         if (!isMobileViewport()) {
             bringToFront('win-map');
         }
+        document.querySelectorAll('.os-window').forEach(clampWindowToViewport);
     </script>
 </body>
 
