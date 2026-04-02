@@ -256,7 +256,8 @@
                     let lastFrameTime = lastTime;
                     const rotVelocity = [0.015, -0.002];
                     let trailHeadIdx = 0;
-                    const trailLength = 64;
+                    const trailLength = 16;
+                    const routeSpeedPerMs = 0.0264/4;
                     const mapWindow = document.getElementById('win-map');
                     const rotationToggleBtn = document.getElementById('toggle-rotation');
                     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -301,7 +302,7 @@
                         }
 
                         // Data-driven path animation
-                        trailHeadIdx += dt * 0.0528;
+                        trailHeadIdx += dt * routeSpeedPerMs;
                         if (trailHeadIdx >= detailedCoords.length) trailHeadIdx = 0;
 
                         const startIdx = Math.max(0, Math.floor(trailHeadIdx) - trailLength);
