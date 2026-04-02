@@ -87,13 +87,13 @@
             <div class="window-body"
                 style="padding: 1rem; background: var(--win-bg); display: flex; flex-direction: column; align-items: stretch; justify-content: flex-start;">
                 <div class="map-container"
-                    style="position: relative; width: 100%; flex: 1 1 auto; min-height: 260px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; background: #000; overflow: hidden; border: 2px solid var(--win-border-dark);">
+                    style="position: relative; width: 100%; flex: 1 1 auto; min-height: 260px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; background: var(--desktop-bg); overflow: hidden; border: 2px solid var(--win-border-dark);">
                     <button id="toggle-rotation" class="os-btn"
                         style="position: absolute; top: 10px; right: 10px; z-index: 100;">Pause Rotation</button>
                     <svg id="globe-svg" width="100%" height="100%" viewBox="0 0 640 640" style="cursor: grab;">
                     </svg>
                     <div id="globe-tooltip"
-                        style="position: absolute; display: none; background: var(--win-bg); color: #00ff00; border: 1px solid #00ff00; padding: 5px; font-family: 'VT323', monospace; font-size: 20px; pointer-events: none; filter: drop-shadow(2px 2px 0 black); z-index: 100;">
+                        style="position: absolute; display: none; background: var(--win-bg); color: var(--text-color); border: 1px solid var(--text-color); padding: 5px; font-family: var(--font-pixel); font-size: 20px; pointer-events: none; filter: drop-shadow(2px 2px 0 black); z-index: 100;">
                     </div>
                 </div>
 
@@ -134,14 +134,14 @@
                         .attr("class", "graticule")
                         .attr("d", geoPathGenerator)
                         .style("fill", "none")
-                        .style("stroke", "#00ff00")
+                        .style("stroke", getComputedStyle(document.documentElement).getPropertyValue('--text-color').trim())
                         .style("stroke-width", "0.5")
                         .style("stroke-opacity", "0.3");
 
                     // Landmasses
                     let landPathGlobe = svgGlobe.append("path")
                         .style("fill", "none")
-                        .style("stroke", "#00ff00")
+                        .style("stroke", getComputedStyle(document.documentElement).getPropertyValue('--text-color').trim())
                         .style("stroke-width", "1.5")
                         .style("filter", "url(#glow)");
 
@@ -661,7 +661,7 @@
                     <img data-src="images/hq/HKDL.jpg" data-lq-src="images/lq/HKDL.jpg" alt="HKDL" loading="lazy" decoding="async">
                     <div>
                         <h3 class="pixel-text mid">Hong Kong Disneyland</h3>
-                        <p style="color: grey;">Tech & Digital Intern | SEP'24 - JUL'25</p><br>
+                        <p style="opacity: 0.8;">Tech & Digital Intern | SEP'24 - JUL'25</p><br>
                         <p>Reduced data interface project cost by 95% compared to a third party quote. Automated over
                             1,100 work-hours per year of manual operations workflows. Developed a full-stack system
                             digitizing record-keeping and incident analysis.</p>
@@ -672,7 +672,7 @@
                     <img data-src="images/hq/deloitte.jpg" data-lq-src="images/lq/deloitte.jpg" alt="Deloitte" loading="lazy" decoding="async">
                     <div>
                         <h3 class="pixel-text mid">Deloitte Digital</h3>
-                        <p style="color: grey;">Consulting Intern | JUL'24 - AUG'24</p><br>
+                        <p style="opacity: 0.8;">Consulting Intern | JUL'24 - AUG'24</p><br>
                         <p>Developed Python scripts for generating QA synthetic marketing data deployments. Managed
                             lifecycle ownership of feature deployment, reducing tracking feature cost by 80%.</p>
                     </div>
@@ -682,7 +682,7 @@
                     <img data-src="images/hq/ubclogo.jpg" data-lq-src="images/lq/ubclogo.jpg" alt="UBC Physics" loading="lazy" decoding="async">
                     <div>
                         <h3 class="pixel-text mid">UBC Physics Dept</h3>
-                        <p style="color: grey;">Teaching Assistant | MAY'23 - APR'24</p><br>
+                        <p style="opacity: 0.8;">Teaching Assistant | MAY'23 - APR'24</p><br>
                         <p>Facilitated lecture and labs for 100+ students, debugging numerical python simulations.</p>
                     </div>
                 </div>
@@ -695,7 +695,7 @@
     <!-- Taskbar -->
     <div class="taskbar">
         <div class="start-btn" onclick="minWindow('all')">
-            <img src="data:image/svg+xml;utf8,<svg width='16' height='16' xmlns='http://www.w3.org/2000/svg'><rect width='7' height='7' fill='%23ff3333'/><rect x='8' width='7' height='7' fill='%2300cc00'/><rect y='8' width='7' height='7' fill='%233333ff'/><rect x='8' y='8' width='7' height='7' fill='%23ffff00'/></svg>"
+            <img src="data:image/svg+xml;utf8,<svg width='16' height='16' xmlns='http://www.w3.org/2000/svg'><rect width='7' height='7' fill='%238b0000'/><rect x='8' width='7' height='7' fill='%2322cc22'/><rect y='8' width='7' height='7' fill='%234b0082'/><rect x='8' y='8' width='7' height='7' fill='%23daa520'/></svg>"
                 alt="Start" style="margin-right: 5px;">
             START
         </div>
