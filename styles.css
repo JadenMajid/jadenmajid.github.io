@@ -1,7 +1,10 @@
 /* Retro OS / Windows 95 CSS */
+
 @font-face {
-    font-family: 'VT323';
-    src: url('/fonts/VT323-Regular.ttf') format('truetype');
+    font-family: 'W95FA';
+    src: url('/fonts/w95fa.woff2') format('woff2'),
+        url('/fonts/w95fa.woff') format('woff'),
+        url('/fonts/W95FA.otf') format('opentype');
     font-style: normal;
     font-weight: 400;
     font-display: swap;
@@ -20,7 +23,7 @@
     --btn-bg: #2a2a2a;
 
     --taskbar-bg: #111;
-    --font-pixel: 'VT323', 'Courier New', monospace;
+    --font-pixel: 'W95FA', 'Geo', 'Courier New', monospace;
 }
 
 * {
