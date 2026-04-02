@@ -30,7 +30,7 @@
             <div class="icon-img">💼</div>
             <span>Experiences.rtf</span>
         </div>
-        <div class="desktop-icon hide-on-mobile" onclick="toggleWindow('win-map')">
+        <div class="desktop-icon" onclick="toggleWindow('win-map')">
             <div class="icon-img">🗺️</div>
             <span>Map.exe</span>
         </div>
@@ -75,7 +75,7 @@
         </div>
 
         <!-- Map Window -->
-        <div class="os-window hide-on-mobile" id="win-map" style="width: 640px; height: 520px; max-width: 90vw; top: 100px; left: calc(50vw + 10px);">
+        <div class="os-window" id="win-map" style="width: 640px; height: 520px; max-width: 90vw; top: 100px; left: calc(50vw + 10px);">
             <div class="title-bar">
                 <div class="title-bar-text">Map.exe</div>
                 <div class="title-bar-controls">
@@ -638,7 +638,7 @@
                 Projects_Folder</div>
             <div class="task-item" id="task-experiences" onclick="toggleWindow('win-experiences')"
                 style="display:none;">Experiences.rtf</div>
-            <div class="task-item active hide-on-mobile" id="task-map" onclick="toggleWindow('win-map')" style="display:block;">Map.exe
+            <div class="task-item active" id="task-map" onclick="toggleWindow('win-map')" style="display:block;">Map.exe
             </div>
         </div>
         <div class="taskbar-time">1:33 PM</div>
@@ -865,10 +865,6 @@
         }
 
         function toggleWindow(id) {
-            if (id === 'win-map' && isMobileViewport()) {
-                return;
-            }
-
             const win = document.getElementById(id);
             const task = document.getElementById("task-" + id.replace("win-", ""));
             if (task) task.style.display = 'block'; // Make sure the task item shows when toggled open
