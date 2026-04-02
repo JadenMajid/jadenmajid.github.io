@@ -192,7 +192,7 @@
                         const p2 = globeRouteCoords[i + 1];
                         const interpolate = d3.geoInterpolate(p1, p2);
                         const dist = d3.geoDistance(p1, p2);
-                        const steps = Math.max(10, Math.floor(dist * 80));
+                        const steps = Math.max(8, Math.floor(dist * 42));
                         for (let j = 0; j <= steps; j++) {
                             detailedCoords.push(interpolate(j / steps));
                         }
@@ -251,24 +251,47 @@
                             });
                     }
 
-                    let lastTime = Date.now();
+                    let lastTime = performance.now();
+                    let lastFrameTime = lastTime;
                     const rotVelocity = [0.015, -0.002];
                     let trailHeadIdx = 0;
-                    const trailLength = 50;
-                    let isAutoRotating = true;
+                    const trailLength = 64;
+                    const mapWindow = document.getElementById('win-map');
+                    const rotationToggleBtn = document.getElementById('toggle-rotation');
+                    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                    const targetFrameMs = prefersReducedMotion ? (1000 / 12) : (1000 / 24);
+                    let isAutoRotating = !prefersReducedMotion;
 
-                    document.getElementById('toggle-rotation').addEventListener('click', function () {
+                    function isGlobeActive() {
+                        const mapVisible = mapWindow && getComputedStyle(mapWindow).display !== 'none';
+                        return mapVisible && !document.hidden;
+                    }
+
+                    rotationToggleBtn.innerText = isAutoRotating ? "Pause Rotation" : "Play Rotation";
+
+                    rotationToggleBtn.addEventListener('click', function () {
                         isAutoRotating = !isAutoRotating;
                         this.innerText = isAutoRotating ? "Pause Rotation" : "Play Rotation";
                         if (isAutoRotating) {
-                            lastTime = Date.now();
+                            lastTime = performance.now();
                         }
                     });
 
                     d3.timer(function () {
-                        const now = Date.now();
-                        const dt = now - lastTime;
+                        const now = performance.now();
+                        const frameDt = now - lastFrameTime;
+
+                        if (frameDt < targetFrameMs) {
+                            return;
+                        }
+
+                        const dt = Math.min(80, now - lastTime);
                         lastTime = now;
+                        lastFrameTime = now;
+
+                        if (!isGlobeActive()) {
+                            return;
+                        }
 
                         // Auto-rotation
                         if (isAutoRotating) {
@@ -285,14 +308,16 @@
                         const currentTrail = detailedCoords.slice(startIdx, endIdx + 1);
 
                         const trailSegments = [];
-                        for (let i = 0; i < currentTrail.length - 1; i++) {
-                            const progress = (i + 1) / (currentTrail.length - 1);
-                            trailSegments.push({
-                                type: "LineString",
-                                coordinates: [currentTrail[i], currentTrail[i + 1]],
-                                opacity: Math.max(0.08, Math.pow(progress, 1.8)),
-                                width: 0.8 + progress * 2.2
-                            });
+                        if (currentTrail.length > 1) {
+                            for (let i = 0; i < currentTrail.length - 1; i++) {
+                                const progress = (i + 1) / (currentTrail.length - 1);
+                                trailSegments.push({
+                                    type: "LineString",
+                                    coordinates: [currentTrail[i], currentTrail[i + 1]],
+                                    opacity: Math.max(0.08, Math.pow(progress, 1.8)),
+                                    width: 0.8 + progress * 2.2
+                                });
+                            }
                         }
 
                         globeRouteLayer.selectAll("path")
