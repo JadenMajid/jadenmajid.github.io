@@ -54,6 +54,7 @@
                 <div class="title-bar-text">Profile.txt</div>
                 <div class="title-bar-controls">
                     <button aria-label="Minimize" onclick="minWindow('win-profile')">_</button>
+                    <button aria-label="Maximize" data-max-btn onclick="maxWindow('win-profile')">[]</button>
                     <button aria-label="Close" onclick="closeWindow('win-profile')">X</button>
                 </div>
             </div>
@@ -81,6 +82,7 @@
                 <div class="title-bar-text">Map.exe</div>
                 <div class="title-bar-controls">
                     <button aria-label="Minimize" onclick="minWindow('win-map')">_</button>
+                    <button aria-label="Maximize" data-max-btn onclick="maxWindow('win-map')">[]</button>
                     <button aria-label="Close" onclick="closeWindow('win-map')">X</button>
                 </div>
             </div>
@@ -440,6 +442,7 @@
                 <div class="title-bar-text">Coursework.db</div>
                 <div class="title-bar-controls">
                     <button aria-label="Minimize" onclick="minWindow('win-coursework')">_</button>
+                    <button aria-label="Maximize" data-max-btn onclick="maxWindow('win-coursework')">[]</button>
                     <button aria-label="Close" onclick="closeWindow('win-coursework')">X</button>
                 </div>
             </div>
@@ -485,6 +488,7 @@
                 <div class="title-bar-text">Projects_Folder</div>
                 <div class="title-bar-controls">
                     <button aria-label="Minimize" onclick="minWindow('win-projects')">_</button>
+                    <button aria-label="Maximize" data-max-btn onclick="maxWindow('win-projects')">[]</button>
                     <button aria-label="Close" onclick="closeWindow('win-projects')">X</button>
                 </div>
             </div>
@@ -649,6 +653,7 @@
                 <div class="title-bar-text">Experiences.rtf</div>
                 <div class="title-bar-controls">
                     <button aria-label="Minimize" onclick="minWindow('win-experiences')">_</button>
+                    <button aria-label="Maximize" data-max-btn onclick="maxWindow('win-experiences')">[]</button>
                     <button aria-label="Close" onclick="closeWindow('win-experiences')">X</button>
                 </div>
             </div>
@@ -746,6 +751,53 @@
             });
         }
 
+        function taskbarHeightPx() {
+            return document.querySelector('.taskbar')?.offsetHeight || 40;
+        }
+
+        function setMaxButtonState(win, isMaximized) {
+            if (!win) return;
+            const btn = win.querySelector('[data-max-btn]');
+            if (!btn) return;
+            btn.setAttribute('aria-label', isMaximized ? 'Restore' : 'Maximize');
+            btn.textContent = isMaximized ? '[-]' : '[]';
+        }
+
+        function applyMaximizedBounds(win) {
+            if (!win) return;
+            const taskbarHeight = taskbarHeightPx();
+            win.style.top = '0px';
+            win.style.left = '0px';
+            win.style.width = window.innerWidth + 'px';
+            win.style.height = (window.innerHeight - taskbarHeight) + 'px';
+        }
+
+        function maxWindow(id) {
+            const win = document.getElementById(id);
+            if (!win) return;
+
+            if (!win.classList.contains('maximized')) {
+                win.dataset.prevTop = win.style.top || '';
+                win.dataset.prevLeft = win.style.left || '';
+                win.dataset.prevWidth = win.style.width || '';
+                win.dataset.prevHeight = win.style.height || '';
+                win.classList.add('maximized');
+                applyMaximizedBounds(win);
+                setMaxButtonState(win, true);
+                bringToFront(id);
+                return;
+            }
+
+            win.classList.remove('maximized');
+            win.style.top = win.dataset.prevTop || '';
+            win.style.left = win.dataset.prevLeft || '';
+            win.style.width = win.dataset.prevWidth || '';
+            win.style.height = win.dataset.prevHeight || '';
+            setMaxButtonState(win, false);
+            clampWindowToViewport(win);
+            bringToFront(id);
+        }
+
         function isMobileViewport() {
             return window.matchMedia('(max-width: 768px)').matches;
         }
@@ -811,6 +863,11 @@
             if (!win || isMobileViewport()) return;
             if (getComputedStyle(win).display === 'none') return;
 
+            if (win.classList.contains('maximized')) {
+                applyMaximizedBounds(win);
+                return;
+            }
+
             const taskbarHeight = document.querySelector('.taskbar')?.offsetHeight || 40;
             const viewportWidth = window.innerWidth;
             const viewportHeight = window.innerHeight - taskbarHeight;
@@ -846,6 +903,7 @@
                 win.appendChild(handle);
 
                 handle.addEventListener('mousedown', function (e) {
+                    if (win.classList.contains('maximized')) return;
                     e.preventDefault();
                     e.stopPropagation();
                     bringToFront(win.id);
@@ -1008,7 +1066,13 @@
         });
 
         window.addEventListener('resize', () => {
-            document.querySelectorAll('.os-window').forEach(clampWindowToViewport);
+            document.querySelectorAll('.os-window').forEach((win) => {
+                if (win.classList.contains('maximized')) {
+                    applyMaximizedBounds(win);
+                } else {
+                    clampWindowToViewport(win);
+                }
+            });
         });
 
         if (window.ResizeObserver) {

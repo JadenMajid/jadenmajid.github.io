@@ -33,7 +33,7 @@ body {
     font-family: var(--font-pixel);
     background-color: var(--desktop-bg);
     color: var(--text-color);
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     overflow: hidden;
     /* Prevent scrolling the desktop itself */
     height: 100vh;
@@ -46,11 +46,11 @@ body {
 }
 
 .large {
-    font-size: 3rem;
+    font-size: 3.2rem;
 }
 
 .mid {
-    font-size: 1.8rem;
+    font-size: 1.95rem;
 }
 
 .highlight-bg {
@@ -89,7 +89,7 @@ body {
     background: var(--title-bg);
     color: var(--title-text);
     padding: 2px 4px;
-    font-size: 1.1rem;
+    font-size: 1.18rem;
 }
 
 .desktop-icon:active span {
@@ -210,7 +210,7 @@ body {
 
 .title-bar-text {
     color: var(--title-text);
-    font-size: clamp(1rem, 0.82rem + 1cqi, 1.25rem);
+    font-size: clamp(1.08rem, 0.9rem + 1cqi, 1.38rem);
     font-weight: bold;
     letter-spacing: 1px;
 }
@@ -247,7 +247,7 @@ body {
     padding: 1.5rem;
     overflow-y: auto;
     flex-grow: 1;
-    font-size: clamp(1rem, 0.86rem + 0.7cqi, 1.3rem);
+    font-size: clamp(1.08rem, 0.94rem + 0.75cqi, 1.4rem);
     line-height: 1.2;
     scrollbar-width: auto;
     scrollbar-color: var(--btn-bg) var(--win-border-dark);
@@ -285,7 +285,7 @@ body {
     background: var(--btn-bg);
     color: var(--text-color);
     font-family: var(--font-pixel);
-    font-size: clamp(0.95rem, 0.82rem + 0.65cqi, 1.2rem);
+    font-size: clamp(1.03rem, 0.88rem + 0.7cqi, 1.28rem);
     text-decoration: none;
     padding: clamp(0.35rem, 0.28rem + 0.35cqi, 0.5rem) clamp(0.7rem, 0.45rem + 1.4cqi, 1.45rem);
     border-top: 2px solid var(--win-border-light);
