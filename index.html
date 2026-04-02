@@ -5,9 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jaden Majid - Portfolio</title>
-    <link rel="icon" type="image/png" href="./images/icon.png">
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Crect width='15' height='15' fill='%23ff3333'/%3E%3Crect x='17' width='15' height='15' fill='%2300cc00'/%3E%3Crect y='17' width='15' height='15' fill='%233333ff'/%3E%3Crect x='17' y='17' width='15' height='15' fill='%23ffff00'/%3E%3C/svg%3E">
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link rel="preload" href="/fonts/VT323-Regular.ttf" as="font" type="font/ttf" crossorigin>
 </head>
 
 <body class="dark-mode">
@@ -104,7 +105,7 @@
                 </style>
 
                 <script src="https://d3js.org/d3.v7.min.js"></script>
-                <script src="https://unpkg.com/topojson-client@3"></script>
+                <script src="vendor/topojson-client.min.js"></script>
                 <script>
                     const globewidth = 640;
                     const globeheight = 640;
@@ -144,7 +145,7 @@
                         .style("stroke-width", "1.5")
                         .style("filter", "url(#glow)");
 
-                    d3.json("https://unpkg.com/world-atlas@2.0.2/countries-110m.json").then(world => {
+                    d3.json("data/land-110m.json").then(world => {
                         const land = topojson.feature(world, world.objects.land);
                         landPathGlobe.datum(land).attr("d", geoPathGenerator);
                     });

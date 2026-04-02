@@ -1,4 +1,12 @@
 /* Retro OS / Windows 95 CSS */
+@font-face {
+    font-family: 'VT323';
+    src: url('/fonts/VT323-Regular.ttf') format('truetype');
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+}
+
 :root {
     /* Dark Mode Defaults (Late Night Hacker OS) */
     --desktop-bg: #000000;
