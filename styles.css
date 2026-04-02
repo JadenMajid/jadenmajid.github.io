@@ -286,6 +286,7 @@ body {
     border-bottom: 2px solid var(--win-border-dark);
     cursor: pointer;
     margin-right: 0.1rem;
+    touch-action: manipulation;
 }
 
 .os-btn:active {
@@ -655,8 +656,23 @@ body {
     }
 
     .os-btn {
-        font-size: 1.22rem;
-        padding: 0.62rem 1.15rem;
+        font-size: 1.34rem;
+        padding: 0.74rem 1.3rem;
+        min-height: 46px;
+    }
+
+    .title-bar-controls button {
+        width: 28px;
+        height: 24px;
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .start-btn,
+    .task-item {
+        min-height: 40px;
+        display: flex;
+        align-items: center;
     }
 
     .window-body {
@@ -712,6 +728,13 @@ body {
 
     .title-bar-text {
         font-size: 1rem;
+    }
+
+    .title-bar-controls button {
+        width: 26px;
+        height: 22px;
+        font-size: 11px;
+        line-height: 16px;
     }
 
     .window-body {

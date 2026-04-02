@@ -333,20 +333,85 @@
                         renderGlobe();
                     });
 
-                    svgGlobe.call(d3.drag()
-                        .on("start", function () {
-                            isAutoRotating = false;
-                            document.getElementById('toggle-rotation').innerText = "Play Rotation";
-                        })
-                        .on("drag", function (event) {
-                            const rotate = projectionParams.rotate();
-                            const k = 75 / projectionParams.scale();
-                            projectionParams.rotate([
-                                rotate[0] + event.dx * k,
-                                rotate[1] - event.dy * k
-                            ]);
-                            renderGlobe();
-                        }));
+                    const supportsTouch = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+                    let touchStartRotate = null;
+                    let touchStartPoint = null;
+                    let pinchStartDistance = null;
+                    let pinchStartScale = null;
+
+                    function getTouchDistance(t1, t2) {
+                        const dx = t1.clientX - t2.clientX;
+                        const dy = t1.clientY - t2.clientY;
+                        return Math.hypot(dx, dy);
+                    }
+
+                    if (supportsTouch) {
+                        svgGlobe.style('touch-action', 'none');
+
+                        const globeNode = svgGlobe.node();
+                        globeNode.addEventListener('touchstart', function (event) {
+                            if (event.touches.length === 1) {
+                                isAutoRotating = false;
+                                rotationToggleBtn.innerText = "Play Rotation";
+                                touchStartPoint = { x: event.touches[0].clientX, y: event.touches[0].clientY };
+                                touchStartRotate = projectionParams.rotate();
+                                pinchStartDistance = null;
+                                pinchStartScale = null;
+                            } else if (event.touches.length === 2) {
+                                pinchStartDistance = getTouchDistance(event.touches[0], event.touches[1]);
+                                pinchStartScale = projectionParams.scale();
+                            }
+                        }, { passive: false });
+
+                        globeNode.addEventListener('touchmove', function (event) {
+                            event.preventDefault();
+
+                            if (event.touches.length === 1 && touchStartPoint && touchStartRotate) {
+                                const dx = event.touches[0].clientX - touchStartPoint.x;
+                                const dy = event.touches[0].clientY - touchStartPoint.y;
+                                const k = 85 / projectionParams.scale();
+
+                                projectionParams.rotate([
+                                    touchStartRotate[0] + dx * k,
+                                    touchStartRotate[1] - dy * k
+                                ]);
+                                renderGlobe();
+                            } else if (event.touches.length === 2 && pinchStartDistance && pinchStartScale) {
+                                const currentDistance = getTouchDistance(event.touches[0], event.touches[1]);
+                                const scaleFactor = currentDistance / pinchStartDistance;
+                                const minScale = 150;
+                                const maxScale = 800;
+                                const newScale = Math.max(minScale, Math.min(maxScale, pinchStartScale * scaleFactor));
+
+                                projectionParams.scale(newScale);
+                                renderGlobe();
+                            }
+                        }, { passive: false });
+
+                        globeNode.addEventListener('touchend', function (event) {
+                            if (event.touches && event.touches.length === 0) {
+                                touchStartPoint = null;
+                                touchStartRotate = null;
+                                pinchStartDistance = null;
+                                pinchStartScale = null;
+                            }
+                        }, { passive: true });
+                    } else {
+                        svgGlobe.call(d3.drag()
+                            .on("start", function () {
+                                isAutoRotating = false;
+                                document.getElementById('toggle-rotation').innerText = "Play Rotation";
+                            })
+                            .on("drag", function (event) {
+                                const rotate = projectionParams.rotate();
+                                const k = 75 / projectionParams.scale();
+                                projectionParams.rotate([
+                                    rotate[0] + event.dx * k,
+                                    rotate[1] - event.dy * k
+                                ]);
+                                renderGlobe();
+                            }));
+                    }
 
                     svgGlobe.on("wheel", function (event) {
                         event.preventDefault();
