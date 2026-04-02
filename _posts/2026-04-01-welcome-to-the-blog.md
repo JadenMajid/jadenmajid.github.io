@@ -1,7 +1,9 @@
 ---
 layout: post
 title: "Welcome to the Blog"
+thumbnail: "images/originals/icon256.jpg"
 date: 2026-04-01 12:00:00 -0700
+tags: [personal]
 excerpt: "About me & this blog"
 ---
 

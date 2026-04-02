@@ -11,19 +11,22 @@
 }
 
 :root {
-    /* Dark Mode Defaults (Late Night Hacker OS) */
-    --desktop-bg: #000000;
-    --win-bg: #1c1c1c;
-    --title-bg: #300050;
-    --title-text: #fff;
-    --text-color: #00ff00;
-    /* Hacker green */
-    --win-border-light: #555;
-    --win-border-dark: #2a2a2a;
+    /* Monolith Terminal Theme */
+    --desktop-bg: #050505;
+    --win-bg: #161616;
+    --title-bg: #222222;
+    --title-text: #e0e0e0;
+    --text-color: #22cc22; /* Clean Phosphor Green */
+    
+    --win-border-light: #444444;
+    --win-border-dark: #000000;
     --btn-bg: #2a2a2a;
 
-    --taskbar-bg: #111;
+    --taskbar-bg: #111111;
     --font-pixel: 'W95FA', 'Geo', 'Courier New', monospace;
+    
+    /* Tertiary Accent */
+    --accent-purple: #4b0082;
 }
 
 * {
@@ -57,8 +60,8 @@ body {
 }
 
 .highlight-bg {
-    background: var(--title-bg);
-    color: var(--title-text);
+    background: var(--accent-purple);
+    color: #fff;
     display: inline-block;
     padding: 0.2rem 0.5rem;
 }
@@ -853,6 +856,7 @@ body.blog-page {
     min-height: 100vh;
     height: auto;
     width: 100%;
+    font-family: var(--font-pixel); /* Apply Windows 95 font */
 }
 
 .blog-shell {
@@ -916,13 +920,116 @@ body.blog-page {
 
 .blog-post-card {
     border: 2px solid var(--win-border-dark);
-    background: var(--desktop-bg);
-    padding: 1rem;
+    background: #0f0f0f; /* Neutral dark for card */
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 120px;
+    margin-bottom: 1rem;
 }
 
-.blog-post-date {
-    opacity: 0.8;
-    margin-bottom: 0.5rem;
+.blog-post-card.has-thumbnail {
+    /* No longer need large padding-right, flex handle it */
+}
+
+.blog-thumbnail-wrapper {
+    flex-shrink: 0;
+    margin: 10px;
+    width: auto;
+    max-width: 300px;
+    height: 180px;
+    
+    overflow: hidden;
+    background-color: #050505;
+    
+    /* Subtle neutral checkerboard */
+    background-image: 
+        linear-gradient(45deg, #0a0a0a 25%, transparent 25%), 
+        linear-gradient(-45deg, #0a0a0a 25%, transparent 25%), 
+        linear-gradient(45deg, transparent 75%, #0a0a0a 75%), 
+        linear-gradient(-45deg, transparent 75%, #0a0a0a 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.blog-thumbnail {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    image-rendering: auto; /* Best for mixed content */
+    display: block;
+}
+
+.blog-post-card-content {
+    padding: 1.2rem 1.5rem;
+    flex-grow: 1;
+}
+
+/* Tag Filtering */
+.blog-filter-container {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: var(--desktop-bg);
+    border: 2px solid var(--win-border-dark);
+}
+
+.filter-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+    color: var(--text-color);
+}
+
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tag-btn {
+    background: var(--btn-bg);
+    color: var(--text-color);
+    border: 2px solid var(--win-border-light);
+    border-right-color: var(--win-border-dark);
+    border-bottom-color: var(--win-border-dark);
+    padding: 0.2rem 0.6rem;
+    font-family: var(--font-pixel);
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.tag-btn:hover {
+    filter: brightness(1.2);
+}
+
+.tag-btn.active {
+    background: var(--title-bg);
+    color: var(--title-text);
+    border-color: var(--win-border-dark);
+    border-right-color: var(--win-border-light);
+    border-bottom-color: var(--win-border-light);
+}
+
+/* Post Tags */
+.blog-post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-bottom: 0.8rem;
+}
+
+.post-tag {
+    font-size: 0.9rem;
+    padding: 0.1rem 0.4rem;
+    background: var(--win-bg);
+    border: 1px solid var(--win-border-dark);
+    opacity: 0.9;
 }
 
 .blog-post-card h2 {
@@ -931,6 +1038,27 @@ body.blog-page {
 
 .blog-post-card p {
     margin-bottom: 0.8rem;
+}
+
+.blog-post-main .blog-thumbnail-large {
+    display: block;
+    max-width: 100%;
+    width: auto;
+    max-height: 300px; /* Reduced from 400px */
+    object-fit: contain; /* Don't crop */
+    margin: 0 auto 1.5rem; /* Centered with margin-bottom */
+}
+
+
+@media (max-width: 600px) {
+    .blog-post-card {
+        flex-direction: column;
+    }
+
+    .blog-thumbnail-wrapper {
+        width: 100%;
+        height: 100%;
+    }
 }
 
 .blog-post-main .os-btn {
@@ -956,6 +1084,10 @@ body.blog-page {
 
 .blog-post-content a {
     color: #8fd3ff;
+}
+
+.hidden {
+    display: none !important;
 }
 
 @media (max-width: 768px) {

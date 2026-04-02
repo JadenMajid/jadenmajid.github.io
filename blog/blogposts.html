@@ -17,7 +17,7 @@ permalink: /blog/blogposts.html
 <body class="blog-page">
     <div class="blog-shell">
         <header class="retro-topbar">
-            <div class="retro-topbar-title">blogposts.html</div>
+            <div class="retro-topbar-title">blog/blogposts.html</div>
             <a class="retro-close-btn" href="{{ '/index.html' | relative_url }}" aria-label="Return to desktop">X</a>
         </header>
 
@@ -25,16 +25,57 @@ permalink: /blog/blogposts.html
             <h1 class="pixel-text large">JADEN'S BLOG</h1>
             <p class="highlight-bg">Nerdy and/or fun stuff</p>
 
-            <section class="blog-post-list">
+            <section class="blog-filter-container">
+                <p class="filter-title pixel-text">Filter by tag:</p>
+                <div class="tag-list" id="tag-filter-list">
+                    <button class="tag-btn active" data-tag="all">all</button>
+                    {% assign all_tags = "" | split: "," %}
+                    {% for post in site.posts %}
+                        {% for tag in post.tags %}
+                            {% unless all_tags contains tag %}
+                                {% capture all_tags %}{{ all_tags | join: "," }},{{ tag }}{% endcapture %}
+                                {% assign all_tags = all_tags | split: "," %}
+                            {% endunless %}
+                        {% endfor %}
+                    {% endfor %}
+                    {% assign sorted_tags = all_tags | sort %}
+                    {% for tag in sorted_tags %}
+                        {% if tag != "" %}
+                        <button class="tag-btn" data-tag="{{ tag }}">{{ tag }}</button>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </section>
+
+            <section class="blog-post-list" id="blog-post-list">
                 {% if site.posts and site.posts.size > 0 %}
                 {% for post in site.posts %}
-                <article class="blog-post-card">
-                    <h2 class="pixel-text mid">{{ post.title }}</h2>
-                    <p class="blog-post-date">{{ post.date | date: "%b %-d, %Y" }}</p>
-                    {% if post.excerpt %}
-                    <p>{{ post.excerpt | strip_html | truncate: 190 }}</p>
+                <article class="blog-post-card {% if post.thumbnail %}has-thumbnail{% endif %}" 
+                         data-tags="{{ post.tags | join: ',' }}"
+                         onclick="window.location='{{ post.url | relative_url }}';"
+                         style="cursor: pointer;">
+                    {% if post.thumbnail %}
+                    <div class="blog-thumbnail-wrapper">
+                        <img src="{{ post.thumbnail | relative_url }}" alt="{{ post.title }}" class="blog-thumbnail">
+                    </div>
                     {% endif %}
-                    <a class="os-btn" href="{{ post.url | relative_url }}">Open Post</a>
+                    <div class="blog-post-card-content">
+                        <h2 class="pixel-text mid">{{ post.title }}</h2>
+                        <p class="blog-post-date">{{ post.date | date: "%b %-d, %Y" }}</p>
+                        
+                        {% if post.tags and post.tags.size > 0 %}
+                        <div class="blog-post-tags">
+                            {% for tag in post.tags %}
+                            <span class="post-tag">{{ tag }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+
+                        {% if post.excerpt %}
+                        <p>{{ post.excerpt | strip_html | truncate: 190 }}</p>
+                        {% endif %}
+                        <a class="os-btn" href="{{ post.url | relative_url }}">Open Post</a>
+                    </div>
                 </article>
                 {% endfor %}
                 {% else %}
@@ -48,6 +89,34 @@ permalink: /blog/blogposts.html
             </section>
         </main>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterButtons = document.querySelectorAll('.tag-btn');
+            const postCards = document.querySelectorAll('.blog-post-card');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const selectedTag = button.getAttribute('data-tag');
+
+                    // Update active state of buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    // Filter posts
+                    postCards.forEach(card => {
+                        const postTags = card.getAttribute('data-tags').split(',');
+                        
+                        if (selectedTag === 'all' || postTags.includes(selectedTag)) {
+                            card.classList.remove('hidden');
+                        } else {
+                            card.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
