@@ -612,16 +612,17 @@ body {
     }
 
     .os-window {
-        position: relative;
-        top: auto !important;
-        left: auto !important;
+        position: fixed;
+        top: 0 !important;
+        left: 0 !important;
         right: auto !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        height: calc(100dvh - 190px) !important;
+        width: 100vw !important;
+        max-width: none !important;
+        height: calc(100dvh - 42px) !important;
         max-height: none;
-        min-height: calc(100dvh - 190px);
+        min-height: calc(100dvh - 42px);
         margin: 0;
+        z-index: 1500;
     }
 
     .resize-handle {
@@ -726,11 +727,6 @@ body {
     .window-body {
         padding: 0.95rem;
         font-size: 1.12rem;
-    }
-
-    .os-window {
-        height: calc(100dvh - 220px) !important;
-        min-height: calc(100dvh - 220px);
     }
 
     .map-container {
