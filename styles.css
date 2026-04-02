@@ -372,9 +372,6 @@ body {
         margin-left: 0.8rem;
     }
 
-    .map-container {
-        height: 280px !important;
-    }
 }
 
 @container (max-width: 440px) {
@@ -403,9 +400,6 @@ body {
         font-size: 0.9rem;
     }
 
-    .map-container {
-        height: 220px !important;
-    }
 }
 
 .project-date {
@@ -633,10 +627,6 @@ body {
         padding: 1rem;
     }
 
-    .map-container {
-        height: 360px !important;
-    }
-
     .taskbar {
         height: 42px;
     }
@@ -727,10 +717,6 @@ body {
     .window-body {
         padding: 0.95rem;
         font-size: 1.12rem;
-    }
-
-    .map-container {
-        height: 260px !important;
     }
 
     .taskbar {
