@@ -1,0 +1,53 @@
+---
+layout: null
+title: Blog Posts
+permalink: /blog/blogposts.html
+---
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Posts - Jaden Majid</title>
+    <link rel="stylesheet" href="{{ '/styles.css' | relative_url }}">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+</head>
+
+<body class="blog-page">
+    <div class="blog-shell">
+        <header class="retro-topbar">
+            <div class="retro-topbar-title">blogposts.html</div>
+            <a class="retro-close-btn" href="{{ '/index.html' | relative_url }}" aria-label="Return to desktop">X</a>
+        </header>
+
+        <main class="blog-main">
+            <h1 class="pixel-text large">JADEN'S BLOG</h1>
+            <p class="highlight-bg">Nerdy and/or fun stuff</p>
+
+            <section class="blog-post-list">
+                {% if site.posts and site.posts.size > 0 %}
+                {% for post in site.posts %}
+                <article class="blog-post-card">
+                    <h2 class="pixel-text mid">{{ post.title }}</h2>
+                    <p class="blog-post-date">{{ post.date | date: "%b %-d, %Y" }}</p>
+                    {% if post.excerpt %}
+                    <p>{{ post.excerpt | strip_html | truncate: 190 }}</p>
+                    {% endif %}
+                    <a class="os-btn" href="{{ post.url | relative_url }}">Open Post</a>
+                </article>
+                {% endfor %}
+                {% else %}
+                <article class="blog-post-card">
+                    <h2 class="pixel-text mid">No Posts Yet</h2>
+                    <p class="blog-post-date">Bootstrap Entry</p>
+                    <p>Add files in <strong>_posts</strong> with standard Jekyll front matter to have posts appear here automatically.</p>
+                    <a class="os-btn" href="{{ '/index.html' | relative_url }}">Return to Desktop</a>
+                </article>
+                {% endif %}
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jaden Majid - OS/95 Portfolio</title>
+    <title>Jaden Majid - Portfolio</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 </head>
@@ -38,9 +38,9 @@
             <div class="icon-img">📘</div>
             <span>CV.pdf</span>
         </div>
-        <div class="desktop-icon" id="theme-toggle">
-            <div class="icon-img">⚙️</div>
-            <span id="theme-label">Light_Mode.exe</span>
+        <div class="desktop-icon" onclick="window.location.href='/blog/blogposts.html'">
+            <div class="icon-img">📝</div>
+            <span>blogposts.html</span>
         </div>
     </div>
 
@@ -337,7 +337,7 @@
                 </script>
                 <p class="pixel-text highlight-bg"
                     style="width: 100%; text-align: center; padding: 10px; margin-bottom: 5px;">
-                    MY PATH<br>YOW -> CMB ->MNL ->NYC -> CVG -> YYZ -> MNL -> PVG -> YVR -> HKG -> YVR
+                    MY PATH<br>YOW -> CMB ->MNL -> NYC -> CVG -> YYZ -> MNL -> PVG -> YVR -> HKG -> YVR
                 </p>
             </div>
         </div>
@@ -619,15 +619,6 @@
     </div>
 
     <script>
-        // Theme Toggle
-        const toggle = document.getElementById("theme-toggle");
-        const label = document.getElementById("theme-label");
-        toggle.addEventListener("click", () => {
-            document.body.classList.toggle("light-mode");
-            document.body.classList.toggle("dark-mode");
-            label.innerText = document.body.classList.contains("light-mode") ? "Dark_Mode.exe" : "Light_Mode.exe";
-        });
-
         // Clock
         setInterval(() => {
             const d = new Date();
@@ -680,6 +671,28 @@
                 map.style.left = Math.max(12, Math.floor((vw - mapWidth) / 2)) + 'px';
                 map.style.top = Math.round(profileRect.bottom + 14) + 'px';
             }
+
+            clampWindowToViewport(profile);
+            clampWindowToViewport(map);
+        }
+
+        function snapWindowToPixelGrid(win) {
+            if (!win || isMobileViewport()) return;
+
+            const rect = win.getBoundingClientRect();
+            const roundedLeft = Math.round(rect.left);
+            const roundedTop = Math.round(rect.top);
+
+            win.style.left = roundedLeft + 'px';
+            win.style.top = roundedTop + 'px';
+
+            if (win.style.width && win.style.width !== 'auto') {
+                win.style.width = Math.round(rect.width) + 'px';
+            }
+
+            if (win.style.height && win.style.height !== 'auto') {
+                win.style.height = Math.round(rect.height) + 'px';
+            }
         }
 
         function clampWindowToViewport(win) {
@@ -690,14 +703,103 @@
             const viewportHeight = window.innerHeight - taskbarHeight;
 
             const rect = win.getBoundingClientRect();
-            const maxLeft = Math.max(0, viewportWidth - rect.width);
-            const maxTop = Math.max(0, viewportHeight - rect.height);
+            const winWidth = Math.round(rect.width);
+            const winHeight = Math.round(rect.height);
+            const minWidth = parseInt(getComputedStyle(win).minWidth, 10) || 320;
+            const minHeight = parseInt(getComputedStyle(win).minHeight, 10) || 220;
+            const targetWidth = Math.max(minWidth, winWidth);
+            const targetHeight = Math.max(minHeight, winHeight);
+            const maxLeft = Math.max(0, viewportWidth - winWidth);
+            const maxTop = Math.max(0, viewportHeight - winHeight);
 
-            const boundedLeft = Math.min(Math.max(rect.left, 0), maxLeft);
-            const boundedTop = Math.min(Math.max(rect.top, 0), maxTop);
+            const boundedLeft = Math.round(Math.min(Math.max(rect.left, 0), maxLeft));
+            const boundedTop = Math.round(Math.min(Math.max(rect.top, 0), maxTop));
 
             win.style.left = boundedLeft + 'px';
             win.style.top = boundedTop + 'px';
+            win.style.width = targetWidth + 'px';
+            win.style.height = targetHeight + 'px';
+            snapWindowToPixelGrid(win);
+        }
+
+        function addResizeHandles(win) {
+            if (!win || isMobileViewport()) return;
+
+            const directions = ['n', 's', 'e', 'w', 'ne', 'nw', 'se', 'sw'];
+            directions.forEach((direction) => {
+                const handle = document.createElement('div');
+                handle.className = `resize-handle ${direction}`;
+                handle.dataset.direction = direction;
+                win.appendChild(handle);
+
+                handle.addEventListener('mousedown', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    bringToFront(win.id);
+
+                    const startRect = win.getBoundingClientRect();
+                    const startX = e.clientX;
+                    const startY = e.clientY;
+                    const taskbarHeight = document.querySelector('.taskbar')?.offsetHeight || 40;
+                    const viewportWidth = window.innerWidth;
+                    const viewportHeight = window.innerHeight - taskbarHeight;
+                    const minWidth = parseInt(getComputedStyle(win).minWidth, 10) || 320;
+                    const minHeight = parseInt(getComputedStyle(win).minHeight, 10) || 220;
+
+                    function onMouseMove(moveEvent) {
+                        const dx = moveEvent.clientX - startX;
+                        const dy = moveEvent.clientY - startY;
+                        let newLeft = startRect.left;
+                        let newTop = startRect.top;
+                        let newWidth = startRect.width;
+                        let newHeight = startRect.height;
+
+                        if (direction.includes('e')) {
+                            newWidth = startRect.width + dx;
+                        }
+                        if (direction.includes('s')) {
+                            newHeight = startRect.height + dy;
+                        }
+                        if (direction.includes('w')) {
+                            newWidth = startRect.width - dx;
+                            newLeft = startRect.left + dx;
+                        }
+                        if (direction.includes('n')) {
+                            newHeight = startRect.height - dy;
+                            newTop = startRect.top + dy;
+                        }
+
+                        newWidth = Math.max(minWidth, Math.min(newWidth, viewportWidth));
+                        newHeight = Math.max(minHeight, Math.min(newHeight, viewportHeight));
+
+                        if (direction.includes('w')) {
+                            newLeft = startRect.right - newWidth;
+                        }
+                        if (direction.includes('n')) {
+                            newTop = startRect.bottom - newHeight;
+                        }
+
+                        const maxLeft = Math.max(0, viewportWidth - newWidth);
+                        const maxTop = Math.max(0, viewportHeight - newHeight);
+                        newLeft = Math.min(Math.max(newLeft, 0), maxLeft);
+                        newTop = Math.min(Math.max(newTop, 0), maxTop);
+
+                        win.style.left = Math.round(newLeft) + 'px';
+                        win.style.top = Math.round(newTop) + 'px';
+                        win.style.width = Math.round(newWidth) + 'px';
+                        win.style.height = Math.round(newHeight) + 'px';
+                    }
+
+                    function onMouseUp() {
+                        document.removeEventListener('mousemove', onMouseMove);
+                        document.removeEventListener('mouseup', onMouseUp);
+                        clampWindowToViewport(win);
+                    }
+
+                    document.addEventListener('mousemove', onMouseMove);
+                    document.addEventListener('mouseup', onMouseUp);
+                });
+            });
         }
 
         function bringToFront(id) {
@@ -759,6 +861,7 @@
         // Draggable Logic
         document.querySelectorAll('.os-window').forEach(win => {
             win.addEventListener('mousedown', () => bringToFront(win.id));
+            addResizeHandles(win);
 
             const titleBar = win.querySelector('.title-bar');
             if (!titleBar) return;
@@ -773,8 +876,8 @@
                 let shiftY = e.clientY - rect.top;
 
                 function moveAt(pageX, pageY) {
-                    win.style.left = pageX - shiftX + 'px';
-                    win.style.top = pageY - shiftY + 'px';
+                    win.style.left = Math.round(pageX - shiftX) + 'px';
+                    win.style.top = Math.round(pageY - shiftY) + 'px';
                 }
 
                 function onMouseMove(event) {

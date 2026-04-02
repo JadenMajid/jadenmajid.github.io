@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }} - Jaden Blog</title>
+    <link rel="stylesheet" href="{{ '/styles.css' | relative_url }}">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+</head>
+
+<body class="blog-page">
+    <div class="blog-shell">
+        <header class="retro-topbar">
+            <div class="retro-topbar-title">{{ page.title }}</div>
+            <a class="retro-close-btn" href="{{ '/blog/blogposts.html' | relative_url }}" aria-label="Return to blog posts">X</a>
+        </header>
+
+        <main class="blog-main blog-post-main">
+            <p><a class="os-btn" href="{{ '/blog/blogposts.html' | relative_url }}">Back to Blog Posts</a></p>
+            <h1 class="pixel-text large">{{ page.title }}</h1>
+            <p class="blog-post-date">{{ page.date | date: "%b %-d, %Y" }}</p>
+            <article class="blog-post-content">
+                {{ content }}
+            </article>
+        </main>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,9 @@
+title: Jaden Majid
+permalink: /blog/posts/:title.html
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
