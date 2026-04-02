@@ -698,6 +698,7 @@
 
         function clampWindowToViewport(win) {
             if (!win || isMobileViewport()) return;
+            if (getComputedStyle(win).display === 'none') return;
 
             const taskbarHeight = document.querySelector('.taskbar')?.offsetHeight || 40;
             const viewportWidth = window.innerWidth;
@@ -910,8 +911,10 @@
 
         // Initial setup
         setInitialWindowLayout();
-        bringToFront('win-profile');
-        if (!isMobileViewport()) {
+        if (isMobileViewport()) {
+            minWindow('all');
+        } else {
+            bringToFront('win-profile');
             bringToFront('win-map');
         }
         document.querySelectorAll('.os-window').forEach(clampWindowToViewport);
