@@ -491,7 +491,7 @@
                 <div class="window-grid">
 
                     <div class="file-item">
-                        <video src="images/ricing.mp4" class="pixel-img" autoplay muted loop playsinline
+                        <video data-src="images/ricing.mp4" class="pixel-img" autoplay muted loop playsinline preload="none"
                             style="object-fit:cover;"></video>
                         <div class="pad-content">
                             <h3 class="pixel-text mid">Personal Ricing</h3>
@@ -508,7 +508,7 @@
                     </div>
 
                     <div class="file-item">
-                        <img src="images/srgan.jpg" alt="ReSkayl" class="pixel-img">
+                        <img data-src="images/srgan.jpg" alt="ReSkayl" class="pixel-img" loading="lazy" decoding="async">
                         <div class="pad-content">
                             <h3 class="pixel-text mid">ReSkayl</h3>
                             <p class="project-date">Ongoing</p>
@@ -524,7 +524,7 @@
                     </div>
 
                     <div class="file-item">
-                        <img src="images/mnist_c.png" alt="NN in C" class="pixel-img">
+                        <img data-src="images/mnist_c.png" alt="NN in C" class="pixel-img" loading="lazy" decoding="async">
                         <div class="pad-content">
                             <h3 class="pixel-text mid">NN in C</h3>
                             <p class="project-date">2024</p>
@@ -540,7 +540,7 @@
                     </div>
 
                     <div class="file-item">
-                        <img src="images/wikipedia.png" alt="WikiScrape" class="pixel-img">
+                        <img data-src="images/wikipedia.png" alt="WikiScrape" class="pixel-img" loading="lazy" decoding="async">
                         <div class="pad-content">
                             <h3 class="pixel-text mid">WikiScrape</h3>
                             <p class="project-date">2025</p>
@@ -557,7 +557,7 @@
                     </div>
 
                     <div class="file-item">
-                        <video src="images/fractal.mp4" class="pixel-img" autoplay muted loop playsinline
+                        <video data-src="images/fractal.mp4" class="pixel-img" autoplay muted loop playsinline preload="none"
                             style="object-fit:cover;"></video>
                         <div class="pad-content">
                             <h3 class="pixel-text mid">Fractal Generator</h3>
@@ -575,7 +575,7 @@
                     </div>
 
                     <div class="file-item">
-                        <img src="images/phys210-updated.gif" alt="PHYS 210" class="pixel-img">
+                        <img data-src="images/phys210-updated.gif" alt="PHYS 210" class="pixel-img" loading="lazy" decoding="async">
                         <div class="pad-content">
                             <h3 class="pixel-text mid">PHYS 210</h3>
                             <p class="project-date">2023</p>
@@ -591,7 +591,7 @@
                     </div>
 
                     <div class="file-item">
-                        <img src="images/Gravity-sim.gif" alt="Gravity" class="pixel-img">
+                        <img data-src="images/Gravity-sim.gif" alt="Gravity" class="pixel-img" loading="lazy" decoding="async">
                         <div class="pad-content">
                             <h3 class="pixel-text mid">Gravity Simulator</h3>
                             <p class="project-date">2022</p>
@@ -607,7 +607,7 @@
                     </div>
 
                     <div class="file-item">
-                        <img src="images/Sorting%20algorithm%20visualizer.gif" alt="Sorting" class="pixel-img">
+                        <img data-src="images/Sorting%20algorithm%20visualizer.gif" alt="Sorting" class="pixel-img" loading="lazy" decoding="async">
                         <div class="pad-content">
                             <h3 class="pixel-text mid">Algo Visualizer</h3>
                             <p class="project-date">2022</p>
@@ -623,7 +623,7 @@
                     </div>
 
                     <div class="file-item">
-                        <img src="images/EE.png" alt="EE" class="pixel-img">
+                        <img data-src="images/EE.png" alt="EE" class="pixel-img" loading="lazy" decoding="async">
                         <div class="pad-content">
                             <h3 class="pixel-text mid">CS Extended Essay</h3>
                             <p class="project-date">2021</p>
@@ -653,7 +653,7 @@
             </div>
             <div class="window-body white-bg">
                 <div class="exp-item">
-                    <img src="images/HKDL.jpg" alt="HKDL">
+                    <img data-src="images/HKDL.jpg" alt="HKDL" loading="lazy" decoding="async">
                     <div>
                         <h3 class="pixel-text mid">Hong Kong Disneyland</h3>
                         <p style="color: grey;">Tech & Digital Intern | SEP'24 - JUL'25</p><br>
@@ -664,7 +664,7 @@
                 </div>
 
                 <div class="exp-item">
-                    <img src="images/deloitte.avif" alt="Deloitte">
+                    <img data-src="images/deloitte.avif" alt="Deloitte" loading="lazy" decoding="async">
                     <div>
                         <h3 class="pixel-text mid">Deloitte Digital</h3>
                         <p style="color: grey;">Consulting Intern | JUL'24 - AUG'24</p><br>
@@ -674,7 +674,7 @@
                 </div>
 
                 <div class="exp-item" style="border-bottom: none;">
-                    <img src="images/ubclogo.jpeg" alt="UBC Physics">
+                    <img data-src="images/ubclogo.jpeg" alt="UBC Physics" loading="lazy" decoding="async">
                     <div>
                         <h3 class="pixel-text mid">UBC Physics Dept</h3>
                         <p style="color: grey;">Teaching Assistant | MAY'23 - APR'24</p><br>
@@ -724,6 +724,26 @@
 
         // Window Manager
         let highestZ = 10;
+
+        function loadLazyMedia(container) {
+            if (!container) return;
+
+            container.querySelectorAll('img[data-src]').forEach((img) => {
+                if (!img.getAttribute('src')) {
+                    img.setAttribute('src', img.dataset.src);
+                }
+            });
+
+            container.querySelectorAll('video[data-src]').forEach((video) => {
+                if (!video.getAttribute('src')) {
+                    video.setAttribute('src', video.dataset.src);
+                    video.load();
+                    if (video.autoplay) {
+                        video.play().catch(() => { });
+                    }
+                }
+            });
+        }
 
         function isMobileViewport() {
             return window.matchMedia('(max-width: 768px)').matches;
@@ -898,6 +918,7 @@
             highestZ++;
             const win = document.getElementById(id);
             if (win) {
+                loadLazyMedia(win);
                 win.style.zIndex = highestZ;
                 win.style.display = 'flex';
                 clampWindowToViewport(win);
@@ -935,6 +956,7 @@
             if (task) task.style.display = 'block'; // Make sure the task item shows when toggled open
 
             if (win.style.display === 'none') {
+                loadLazyMedia(win);
                 win.style.display = 'flex';
                 bringToFront(id);
             } else {
