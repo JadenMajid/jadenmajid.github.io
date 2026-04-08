@@ -38,6 +38,7 @@
 body {
     font-family: var(--font-pixel);
     background-color: var(--desktop-bg);
+    background-image: url('/images/bg/fishbg.gif');
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -943,6 +944,7 @@ body.blog-page {
     overflow-y: scroll;
     overflow-x: hidden;
     scrollbar-gutter: stable;
+    background-attachment: fixed;
     min-height: 100vh;
     height: auto;
     width: 100%;
