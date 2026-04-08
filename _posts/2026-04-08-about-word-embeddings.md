@@ -28,7 +28,6 @@ This model could some some encodings like the following:
 | horse | 0.1 |
 | sick | 0.0 |
 
-<br>
 The model has some dictionary of words it’s categorized previously, then outputs the embedding. We chose to give words like “sick” a neural score because of its double meanings of both “unwell” and “very cool”, which aren’t captured well by this super simple model.
 <br><br>
 
@@ -37,7 +36,6 @@ The model has some dictionary of words it’s categorized previously, then outpu
     <p style="font-size: 0.9rem; opacity: 0.7; margin-top: 0.5rem;">Fig 1: The difference between vectors embeds analogous meanings between words.</p>
 </div>
 
-<br><br>
 Consider some model that encodes some limited vocabulary of words with dimensions for gender and age. As shown in the above simplified figure (adapted from CMU), we can see that the difference between adult and boy is equal to the difference between woman and child. These distance vectors are useful for encoding the relationship between words. While the magnitude and direction of the vectors can be very hard to interpret, we can use these difference vectors to both find words with similar relationships and the ratio of two distances can reveal what words are more closely related. Additionally, we can find the words “closest” to a word. Here are some benign examples calculated.
 <br>
 
