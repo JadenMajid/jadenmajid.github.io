@@ -15,23 +15,23 @@
     <div class="desktop-icons">
         <div class="desktop-icon" onclick="toggleWindow('win-profile')">
             <div class="icon-img">📄</div>
-            <span>Profile.txt</span>
+            <span>profile.txt</span>
         </div>
         <div class="desktop-icon" onclick="toggleWindow('win-coursework')">
             <div class="icon-img">🗄️</div>
-            <span>Coursework.db</span>
+            <span>coursework.db</span>
         </div>
         <div class="desktop-icon" onclick="toggleWindow('win-projects')">
             <div class="icon-img">📁</div>
-            <span>Projects_Folder</span>
+            <span>projects-folder</span>
         </div>
         <div class="desktop-icon" onclick="toggleWindow('win-experiences')">
             <div class="icon-img">💼</div>
-            <span>Experiences.rtf</span>
+            <span>experiences.rtf</span>
         </div>
         <div class="desktop-icon" onclick="toggleWindow('win-map')">
             <div class="icon-img">🗺️</div>
-            <span>Map.exe</span>
+            <span>map.exe</span>
         </div>
         <div class="desktop-icon"
             onclick="window.open('https://jmajid.com/pdfs/JadenMajid_CV_2026_03_19.pdf', '_blank', 'noopener,noreferrer')">
@@ -49,7 +49,7 @@
         <!-- Profile Window -->
         <div class="os-window" id="win-profile" style="width: 450px; top: 100px; left: calc(50vw - 460px);">
             <div class="title-bar">
-                <div class="title-bar-text">Profile.txt</div>
+                <div class="title-bar-text">profile.txt</div>
                 <div class="title-bar-controls">
                     <button aria-label="Minimize" onclick="minWindow('win-profile')">_</button>
                     <button aria-label="Maximize" data-max-btn onclick="maxWindow('win-profile')">[]</button>
@@ -76,7 +76,7 @@
         <!-- Map Window -->
         <div class="os-window" id="win-map" style="width: 640px; height: 520px; max-width: 90vw; top: 100px; left: calc(50vw + 10px);">
             <div class="title-bar">
-                <div class="title-bar-text">Map.exe</div>
+                <div class="title-bar-text">map.exe</div>
                 <div class="title-bar-controls">
                     <button aria-label="Minimize" onclick="minWindow('win-map')">_</button>
                     <button aria-label="Maximize" data-max-btn onclick="maxWindow('win-map')">[]</button>
@@ -437,7 +437,7 @@
         <!-- Coursework Window -->
         <div class="os-window" id="win-coursework" style="width: 800px; top: 80px; left: 160px; display: none;">
             <div class="title-bar">
-                <div class="title-bar-text">Coursework.db</div>
+                <div class="title-bar-text">coursework.db</div>
                 <div class="title-bar-controls">
                     <button aria-label="Minimize" onclick="minWindow('win-coursework')">_</button>
                     <button aria-label="Maximize" data-max-btn onclick="maxWindow('win-coursework')">[]</button>
@@ -483,7 +483,7 @@
         <div class="os-window" id="win-projects"
             style="width: 800px; max-width: 90vw; height: 50vw; max-height: 600px; top: 120px; left: 190px; display: none;">
             <div class="title-bar">
-                <div class="title-bar-text">Projects_Folder</div>
+                <div class="title-bar-text">projects-folder</div>
                 <div class="title-bar-controls">
                     <button aria-label="Minimize" onclick="minWindow('win-projects')">_</button>
                     <button aria-label="Maximize" data-max-btn onclick="maxWindow('win-projects')">[]</button>
@@ -521,8 +521,11 @@
                                 <span class="tech-tag">CNN</span>
                             </div>
                             <p>PyTorch SRGAN Upscaler architecture without VGG weights for stable training.</p>
-                            <br><a href="https://github.com/JadenMajid/ReSkayl" target="_blank"
-                                class="os-btn select-all">View</a>
+                            <br>
+                            <div class="field-row">
+                                <a href="https://github.com/JadenMajid/ReSkayl" target="_blank" class="os-btn">View Code</a>
+                                <a href="/blog/posts/gan-upscaler.html" class="os-btn">Blog Post</a>
+                            </div>
                         </div>
                     </div>
 
@@ -648,7 +651,7 @@
         <div class="os-window" id="win-experiences"
             style="width: 800px; top: 180px; left: 220px; max-height: 500px; display: none;">
             <div class="title-bar">
-                <div class="title-bar-text">Experiences.rtf</div>
+                <div class="title-bar-text">experiences.rtf</div>
                 <div class="title-bar-controls">
                     <button aria-label="Minimize" onclick="minWindow('win-experiences')">_</button>
                     <button aria-label="Maximize" data-max-btn onclick="maxWindow('win-experiences')">[]</button>

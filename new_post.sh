@@ -18,16 +18,25 @@ if [ -f "$FILENAME" ]; then
     exit 1
 fi
 
-cat <<EOF > "$FILENAME"
+if [ -f "template.md" ]; then
+    # Use template.md as source, replacing title and date
+    sed "s/title: \"Template Post Title\"/title: \"$TITLE\"/" template.md | \
+    sed "s/date: YYYY-MM-DD/date: $DATE/" > "$FILENAME"
+else
+    # Fallback if template is missing
+    cat <<EOF > "$FILENAME"
 ---
 layout: post
 title: "$TITLE"
 date: $DATE
 thumbnail: "/images/icon.png"
+repo: ""
 tags: []
+math: false
 ---
 
 Write your content here...
 EOF
+fi
 
 echo "Created new post: $FILENAME"

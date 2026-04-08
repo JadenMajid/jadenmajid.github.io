@@ -1,5 +1,11 @@
 title: Jaden Majid
 permalink: /blog/posts/:title.html
+highlighter: rouge
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
 
 defaults:
   - scope:

@@ -60,7 +60,9 @@ permalink: /blog/blogposts.html
                     </div>
                     {% endif %}
                     <div class="blog-post-card-content">
-                        <h2 class="pixel-text mid">{{ post.title }}</h2>
+                        <div class="blog-post-header">
+                            <h2 class="pixel-text mid">{{ post.title }}</h2>
+                        </div>
                         <p class="blog-post-date">{{ post.date | date: "%b %-d, %Y" }}</p>
                         
                         {% if post.tags and post.tags.size > 0 %}
@@ -74,7 +76,6 @@ permalink: /blog/blogposts.html
                         {% if post.excerpt %}
                         <p>{{ post.excerpt | strip_html | truncate: 190 }}</p>
                         {% endif %}
-                        <a class="os-btn" href="{{ post.url | relative_url }}">Open Post</a>
                     </div>
                 </article>
                 {% endfor %}

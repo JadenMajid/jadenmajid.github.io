@@ -1034,12 +1034,26 @@ body.blog-page {
     opacity: 0.9;
 }
 
-.blog-post-card h2 {
-    margin-bottom: 0.4rem;
+.blog-post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.2rem;
 }
 
-.blog-post-card p {
+.blog-post-header h1, .blog-post-header h2 {
+    margin-bottom: 0;
+}
+
+.repo-btn {
+    flex-shrink: 0;
+}
+
+.blog-post-date {
+    opacity: 0.8;
     margin-bottom: 0.8rem;
+    font-size: 0.95rem;
 }
 
 .blog-post-main .blog-thumbnail-large {
@@ -1063,8 +1077,17 @@ body.blog-page {
     }
 }
 
-.blog-post-main .os-btn {
+.blog-card-actions, .blog-post-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
     margin-bottom: 1rem;
+}
+
+.blog-post-main .blog-post-actions {
+    margin-top: 0;
 }
 
 .blog-post-content {
@@ -1076,20 +1099,121 @@ body.blog-page {
     padding-left: 1.7rem;
 }
 
-.blog-post-content p,
-.blog-post-content ul,
-.blog-post-content ol,
-.blog-post-content pre,
-.blog-post-content blockquote {
-    margin-bottom: 0.95rem;
+.blog-post-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.2rem 0;
+    background: #0b0b0b;
+    border-top: 2px solid var(--win-border-light);
+    border-left: 2px solid var(--win-border-light);
+    border-right: 2px solid #1b1b1b;
+    border-bottom: 2px solid #1b1b1b;
+    font-size: 1rem;
 }
+
+.blog-post-content thead {
+    background: var(--title-bg);
+}
+
+.blog-post-content th,
+.blog-post-content td {
+    padding: 0.55rem 0.7rem;
+    text-align: left;
+    vertical-align: top;
+    border: 1px solid #3f3f3f;
+}
+
+.blog-post-content th {
+    color: var(--title-text);
+    letter-spacing: 0.5px;
+    font-weight: bold;
+}
+
+.blog-post-content tbody tr:nth-child(odd) {
+    background: #121212;
+}
+
+.blog-post-content tbody tr:nth-child(even) {
+    background: #0d0d0d;
+}
+
+.blog-post-content tbody tr:hover {
+    background: #1a1a1a;
+}
+
+/* Syntax Highlighting (Monolith Terminal Theme) */
+.highlight {
+    background: #0a0a0a;
+    color: #e0e0e0;
+    padding: 1rem;
+    margin: 1.5rem 0;
+    border: 1px solid var(--win-border-dark);
+    overflow-x: auto;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.highlight .c, .highlight .cm, .highlight .c1 { color: #555555; font-style: italic; } /* Comment */
+.highlight .k, .highlight .kd, .highlight .kn, .highlight .kp, .highlight .kr { color: #44bb44; font-weight: bold; } /* Keyword */
+.highlight .s, .highlight .s1, .highlight .s2 { color: #8fd3ff; } /* String */
+.highlight .nf, .highlight .fm { color: #22cc22; } /* Function */
+.highlight .nb { color: #e0e0e0; } /* Builtin */
+.highlight .o, .highlight .ow { color: #44bb44; } /* Operator */
+.highlight .gh { color: #4b0082; font-weight: bold; } /* Generic Heading */
+.highlight .nc { color: #8fd3ff; text-decoration: underline; } /* Name Class */
+.highlight .mi, .highlight .mf, .highlight .mh, .highlight .mo, .highlight .m, .highlight .mi, .highlight .mf, .highlight .mh, .highlight .mo, .highlight .mi { color: #daa520; } /* Literal Number */
+.highlight .nt { color: #44bb44; font-weight: bold; } /* Name Tag */
+.highlight .na { color: #8fd3ff; } /* Name Attribute */
+.highlight .err { color: #8b0000; background-color: #000; } /* Error */
+.highlight .p { color: #ccdcdb; } /* Punctuation */
+.highlight .n { color: #ccdcdb; } /* Name/Identifier */
+.highlight .bp { color: #44bb44; } /* Name Builtin Pseudo */
 
 .blog-post-content a {
     color: #8fd3ff;
 }
 
-.hidden {
-    display: none !important;
+/* Callouts */
+.callout {
+    margin: 1.5rem 0;
+    padding: 1rem 1.2rem;
+    border-left: 4px solid var(--accent-purple);
+    background: #1a1a1a;
+    border-top: 1px solid var(--win-border-dark);
+    border-right: 1px solid var(--win-border-dark);
+    border-bottom: 1px solid var(--win-border-dark);
+}
+
+.callout.info {
+    border-left-color: #22cc22; /* Theme Green */
+}
+
+.callout.warning {
+    border-left-color: #daa520; /* Muted Gold */
+}
+
+.callout.important {
+    border-left-color: #8b0000; /* Dark Red */
+}
+
+.callout-title {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    display: block;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+/* Math Styles */
+.mjx-chtml {
+    color: var(--text-color) !important;
+}
+
+.math-block {
+    overflow-x: auto;
+    padding: 1rem 0;
+    text-align: center;
 }
 
 @media (max-width: 768px) {
@@ -1102,4 +1226,30 @@ body.blog-page {
     .blog-main {
         padding: 1.05rem 1.15rem;
     }
+
+    .blog-post-content table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
 }
+
+/* High Specificity Syntax Highlighting Overrides */
+.blog-post-content .highlight, 
+.blog-post-content .highlight pre,
+.blog-post-content .highlight code {
+    color: #e0e0e0 !important;
+    background: #0a0a0a !important;
+}
+
+.blog-post-content .highlight .c, .blog-post-content .highlight .cm, .blog-post-content .highlight .c1 { color: #777777 !important; }
+.blog-post-content .highlight .k, .blog-post-content .highlight .kd, .blog-post-content .highlight .kn, .blog-post-content .highlight .kp, .blog-post-content .highlight .kr { color: #ff79c6 !important; font-weight: bold !important; } 
+.blog-post-content .highlight .s, .blog-post-content .highlight .s1, .blog-post-content .highlight .s2 { color: #f1fa8c !important; } 
+.blog-post-content .highlight .nf, .blog-post-content .highlight .fm { color: #50fa7b !important; } 
+.blog-post-content .highlight .nc { color: #8be9fd !important; } 
+.blog-post-content .highlight .mi, .blog-post-content .highlight .mf, .blog-post-content .highlight .mh, .blog-post-content .highlight .mo, .blog-post-content .highlight .m { color: #bd93f9 !important; } 
+.blog-post-content .highlight .na { color: #ffb86c !important; } 
+.blog-post-content .highlight .ow { color: #ff79c6 !important; } 
+.blog-post-content .highlight .p { color: #f8f8f2 !important; } 
+.blog-post-content .highlight .n { color: #f8f8f2 !important; } 
+.blog-post-content .highlight .bp { color: #8be9fd !important; font-style: italic !important; }
