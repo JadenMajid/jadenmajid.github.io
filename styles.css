@@ -933,8 +933,8 @@ body.blog-page {
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
 }
 
-.blog-post-card.has-thumbnail {
-    /* No longer need large padding-right, flex handle it */
+.blog-post-card.hidden {
+    display: none;
 }
 
 .blog-thumbnail-wrapper {

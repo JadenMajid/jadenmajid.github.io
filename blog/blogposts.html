@@ -106,7 +106,10 @@ permalink: /blog/blogposts.html
 
                     // Filter posts
                     postCards.forEach(card => {
-                        const postTags = card.getAttribute('data-tags').split(',');
+                        const postTags = (card.getAttribute('data-tags') || '')
+                            .split(',')
+                            .map(tag => tag.trim())
+                            .filter(Boolean);
                         
                         if (selectedTag === 'all' || postTags.includes(selectedTag)) {
                             card.classList.remove('hidden');
