@@ -149,7 +149,7 @@
     const rotationToggleBtn = document.getElementById('toggle-rotation');
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const targetFrameMs = prefersReducedMotion ? (1000 / 12) : (1000 / 24);
-    const rotationVelocity = [0.015, -0.002];
+    const rotationVelocity = 0.015;
     const routeSpeedPerMs = 0.0264 / 4;
     const trailLength = 16;
 
@@ -157,6 +157,14 @@
     let lastTime = performance.now();
     let lastFrameTime = lastTime;
     let trailHeadIdx = 0;
+
+    function clampLatitude(latitude) {
+        return Math.max(-89, Math.min(89, latitude));
+    }
+
+    function setRotation(longitude, latitude) {
+        projection.rotate([longitude, clampLatitude(latitude), 0]);
+    }
 
     function updateRotationToggleLabel() {
         if (!rotationToggleBtn) return;
@@ -193,7 +201,7 @@
 
         if (isAutoRotating) {
             const rot = projection.rotate();
-            projection.rotate([rot[0] + rotationVelocity[0] * dt, rot[1] + rotationVelocity[1] * dt]);
+            setRotation(rot[0] + rotationVelocity * dt, rot[1]);
         }
 
         trailHeadIdx += dt * routeSpeedPerMs;
@@ -268,7 +276,7 @@
                 const dx = event.touches[0].clientX - touchStartPoint.x;
                 const dy = event.touches[0].clientY - touchStartPoint.y;
                 const k = 85 / projection.scale();
-                projection.rotate([touchStartRotate[0] + dx * k, touchStartRotate[1] - dy * k]);
+                setRotation(touchStartRotate[0] + dx * k, touchStartRotate[1] - dy * k);
                 renderGlobe();
             } else if (event.touches.length === 2 && pinchStartDistance && pinchStartScale) {
                 const currentDistance = getTouchDistance(event.touches[0], event.touches[1]);
@@ -297,7 +305,7 @@
                 .on('drag', function (event) {
                     const rotate = projection.rotate();
                     const k = 75 / projection.scale();
-                    projection.rotate([rotate[0] + event.dx * k, rotate[1] - event.dy * k]);
+                    setRotation(rotate[0] + event.dx * k, rotate[1] - event.dy * k);
                     renderGlobe();
                 })
         );
