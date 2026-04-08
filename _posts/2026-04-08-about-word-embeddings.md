@@ -9,13 +9,13 @@ excerpt: "This was originally written as part of HW9 for CPSC 330, but was not i
 ---
 
 This was originally written as part of HW9 for CPSC 330, but was scrapped because it didn’t quite fit the requirements. I decided to post it for fun anyways because it was already written and I didn't want it to go to waste.
-<br>
+<br><br>
 
 ## The Good
 
 Word embedding is a machine learning technique where words are projected into a fixed dimension space that encodes their semantic meaning. As a super simple example, consider some one dimensional embedding space that encodes the “positivity” of words. This super simple model takes words as input and outputs a single number from \-1 to 1\. In more formal terms (the model is f):
 
-$$f: \mathbb{R}^d \to \mathbb{R}, \quad \mathbf{x} \mapsto f(\mathbf{x})$$
+$$f: \mathbb{R}^d \to \mathbb{R}^1, \quad \mathbf{x} \mapsto f(\mathbf{x})$$
 
 This model could some some encodings like the following:
 <br>
@@ -31,13 +31,13 @@ This model could some some encodings like the following:
 
 The model has some dictionary of words it’s categorized previously, then outputs the embedding. We chose to give words like “sick” a neural score because of its double meanings of both “unwell” and “very cool”, which aren’t captured well by this super simple model.
 <br><br>
-
+Next, consider some model that encodes some limited vocabulary of words with dimensions for gender and age.
 <div style="text-align: center; margin: 2rem 0;">
     <img src="{{ '/images/blog/wordembedding_difference.png' | relative_url }}" alt="plot of word embeddings" class="pixel-img" style="max-width: 100%; height: auto; border: 2px solid var(--win-border-dark);">
-    <p style="font-size: 0.9rem; opacity: 0.7; margin-top: 0.5rem;">Fig 1: The difference between vectors embeds analogous meanings between words.</p>
+    <p style="font-size: 0.9rem; opacity: 0.7; margin-top: 0.5rem;">Fig 1: The difference between vectors embeds analogous meanings between words. <a href="https://www.cs.cmu.edu/~dst/WordEmbeddingDemo/tutorial.html">Adapted from CMU</a></p>
 </div>
 
-Consider some model that encodes some limited vocabulary of words with dimensions for gender and age. As shown in the above simplified figure (adapted from CMU), we can see that the difference between adult and boy is equal to the difference between woman and child. These distance vectors are useful for encoding the relationship between words. While the magnitude and direction of the vectors can be very hard to interpret, we can use these difference vectors to both find words with similar relationships and the ratio of two distances can reveal what words are more closely related. Additionally, we can find the words “closest” to a word. Here are some benign examples calculated.
+ As shown in the above simplified figure, we can see that the difference between adult and boy is equal to the difference between woman and child. These distance vectors are useful for encoding the relationship between words. While the magnitude and direction of the vectors can be very hard to interpret, we can use these difference vectors to both find words with similar relationships and the ratio of two distances can reveal what words are more closely related. Additionally, we can find the words “closest” to the word+difference vector. Here are some benign examples calculated for "closest" words.
 <br>
 
 | Word | Closest Word | Similarity Score |
@@ -67,4 +67,4 @@ We can see clear biases associated with both gender and race in the above exampl
 
 ## The Ugly
 
-Biases in embeddings cause harm by creating latent space associations that affect the models trained on the embeddings. I think this part is pretty self evident, so I’m going to leave it at that.
+Biases in embeddings cause harm by creating latent space associations that affect the models trained on the embeddings. This can be in anything from parsing coverletters to writing help tools like Grammarly. I think the negative implications are pretty self evident, so I’m going to leave it at that.
