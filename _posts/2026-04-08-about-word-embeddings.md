@@ -9,6 +9,7 @@ excerpt: "This was originally written as part of HW9 for CPSC 330, but was not i
 ---
 
 This was originally written as part of HW9 for CPSC 330, but was scrapped because it didn’t quite fit the requirements. I decided to post it for fun anyways because it was already written and I didn't want it to go to waste.
+<br>
 
 ## The Good
 
