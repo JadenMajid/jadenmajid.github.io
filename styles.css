@@ -38,6 +38,9 @@
 body {
     font-family: var(--font-pixel);
     background-color: var(--desktop-bg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
     color: var(--text-color);
     font-size: 1.3rem;
     overflow: hidden;
@@ -81,7 +84,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 80px;
+    width: 132px;
     cursor: pointer;
     text-align: center;
 }
@@ -92,10 +95,16 @@ body {
 }
 
 .desktop-icon span {
+    display: block;
+    width: 100%;
     background: var(--title-bg);
     color: var(--title-text);
     padding: 2px 4px;
-    font-size: 1.18rem;
+    font-size: 1.05rem;
+    line-height: 1.1;
+    white-space: normal;
+    overflow-wrap: normal;
+    word-break: normal;
 }
 
 .desktop-icon:active span {

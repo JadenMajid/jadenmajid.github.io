@@ -42,6 +42,10 @@
             <div class="icon-img">📝</div>
             <span>blogposts.html</span>
         </div>
+        <div class="desktop-icon" onclick="randomizeDesktopBg()">
+            <div class="icon-img">🖼️</div>
+            <span>randomize_bg.bat</span>
+        </div>
     </div>
 
     <div class="os-container">
@@ -717,6 +721,15 @@
     </div>
 
     <script>
+        const bgGifOptions = ['dvd.gif', 'fishbg.gif', 'mystify.gif', 'pipes.gif'];
+
+        function randomizeDesktopBg() {
+            if (!bgGifOptions.length) return;
+            const randomIndex = Math.floor(Math.random() * bgGifOptions.length);
+            const chosenGif = bgGifOptions[randomIndex];
+            document.body.style.backgroundImage = `url('/images/bg/${chosenGif}')`;
+        }
+
         // Clock
         setInterval(() => {
             const d = new Date();
