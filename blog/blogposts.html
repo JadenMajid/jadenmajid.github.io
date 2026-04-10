@@ -1,126 +1,38 @@
----
-layout: null
-title: Blog Posts
-permalink: /blog/blogposts.html
----
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog Posts - Jaden Majid</title>
-    <link rel="icon" type="image/png" href="{{ 'images/icon128.png' | relative_url }}">
-    <link rel="stylesheet" href="{{ '/styles.css' | relative_url }}">
+    <title>Blog - Jaden Majid</title>
+    <link rel="icon" type="image/png" href="../images/icon128.png">
+    <link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="blog-page">
     <div class="blog-shell">
         <header class="retro-topbar">
             <div class="retro-topbar-title">blog/blogposts.html</div>
-            <a class="retro-close-btn" href="{{ '/index.html' | relative_url }}" aria-label="Return to desktop">X</a>
+            <a class="retro-close-btn" href="/index.html" aria-label="Return to desktop">X</a>
         </header>
 
         <main class="blog-main">
-            <h1 class="pixel-text large">JADEN'S BLOG</h1>
-            <p class="highlight-bg">Nerdy and/or fun stuff</p>
-
-            <section class="blog-filter-container">
-                <p class="filter-title pixel-text">Filter by tag:</p>
-                <div class="tag-list" id="tag-filter-list">
-                    <button class="tag-btn active" data-tag="all">all</button>
-                    {% assign all_tags = "" | split: "," %}
-                    {% for post in site.posts %}
-                        {% for tag in post.tags %}
-                            {% unless all_tags contains tag %}
-                                {% capture all_tags %}{{ all_tags | join: "," }},{{ tag }}{% endcapture %}
-                                {% assign all_tags = all_tags | split: "," %}
-                            {% endunless %}
-                        {% endfor %}
-                    {% endfor %}
-                    {% assign sorted_tags = all_tags | sort %}
-                    {% for tag in sorted_tags %}
-                        {% if tag != "" %}
-                        <button class="tag-btn" data-tag="{{ tag }}">{{ tag }}</button>
-                        {% endif %}
-                    {% endfor %}
-                </div>
-            </section>
+            <h1 class="pixel-text large">BLOG MOVED</h1>
+            <p class="highlight-bg">New posts now live on Substack.</p>
 
             <section class="blog-post-list" id="blog-post-list">
-                {% if site.posts and site.posts.size > 0 %}
-                {% for post in site.posts %}
-                <article class="blog-post-card {% if post.thumbnail %}has-thumbnail{% endif %}" 
-                         data-tags="{{ post.tags | join: ',' }}"
-                         onclick="window.location='{{ post.url | relative_url }}';"
-                         style="cursor: pointer;">
-                    {% if post.thumbnail %}
-                    <div class="blog-thumbnail-wrapper">
-                        <img src="{{ post.thumbnail | relative_url }}" alt="{{ post.title }}" class="blog-thumbnail">
-                    </div>
-                    {% endif %}
-                    <div class="blog-post-card-content">
-                        <div class="blog-post-header">
-                            <h2 class="pixel-text mid">{{ post.title }}</h2>
-                        </div>
-                        <p class="blog-post-date">{{ post.date | date: "%b %-d, %Y" }}</p>
-                        
-                        {% if post.tags and post.tags.size > 0 %}
-                        <div class="blog-post-tags">
-                            {% for tag in post.tags %}
-                            <span class="post-tag">{{ tag }}</span>
-                            {% endfor %}
-                        </div>
-                        {% endif %}
-
-                        {% if post.excerpt %}
-                        <p>{{ post.excerpt | strip_html | truncate: 190 }}</p>
-                        {% endif %}
-                    </div>
-                </article>
-                {% endfor %}
-                {% else %}
                 <article class="blog-post-card">
-                    <h2 class="pixel-text mid">No Posts Yet</h2>
-                    <p class="blog-post-date">Bootstrap Entry</p>
-                    <p>Add files in <strong>_posts</strong> with standard Jekyll front matter to have posts appear here automatically.</p>
-                    <a class="os-btn" href="{{ '/index.html' | relative_url }}">Return to Desktop</a>
+                    <h2 class="pixel-text mid">Follow on Substack</h2>
+                    <p class="blog-post-date">Updated Apr 10, 2026</p>
+                    <p>I migrated the blog from this Jekyll setup to Substack. Use the button below to read the latest posts.</p>
+                    <div class="field-row">
+                        <a class="os-btn" href="https://jadenmajid.substack.com/" target="_blank" rel="noopener noreferrer">Open Substack</a>
+                        <a class="os-btn" href="/index.html">Return to Desktop</a>
+                    </div>
                 </article>
-                {% endif %}
             </section>
         </main>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const filterButtons = document.querySelectorAll('.tag-btn');
-            const postCards = document.querySelectorAll('.blog-post-card');
-
-            filterButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const selectedTag = button.getAttribute('data-tag');
-
-                    // Update active state of buttons
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
-                    button.classList.add('active');
-
-                    // Filter posts
-                    postCards.forEach(card => {
-                        const postTags = (card.getAttribute('data-tags') || '')
-                            .split(',')
-                            .map(tag => tag.trim())
-                            .filter(Boolean);
-                        
-                        if (selectedTag === 'all' || postTags.includes(selectedTag)) {
-                            card.classList.remove('hidden');
-                        } else {
-                            card.classList.add('hidden');
-                        }
-                    });
-                });
-            });
-        });
-    </script>
 </body>
 
 </html>
