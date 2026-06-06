@@ -56,13 +56,13 @@
         { name: 'VANCOUVER 2022 - 2024, 2026', coords: [-123.1207, 49.2827], type: 'pink' },
         { name: 'HONG KONG 2025', coords: [114.1694, 22.3193], type: 'pink' },
         { name: "MT FUJI - Climbed '25", coords: [138.7274, 35.3606], type: 'gold' },
-        { name: 'WHISTLER - Home Ski Spot', coords: [-122.9574, 50.1163], type: 'gold' },
-        { name: 'NISEKO - Craziest Pow for Skiing', coords: [140.6874, 42.8048], type: 'gold' },
+        { name: 'WHISTLER - Home Ski Hill', coords: [-122.9574, 50.1163], type: 'gold' },
+        { name: 'NISEKO - Favorite Powder Skiing', coords: [140.6874, 42.8048], type: 'gold' },
         { name: 'PALAWAN - Swimming with Whalesharks', coords: [118.7361, 9.8432], type: 'gold' },
-        { name: 'LONDON - Favorite City', coords: [-0.1278, 51.5074], type: 'gold' },
+        { name: 'LONDON - Planning to move here after uni!', coords: [-0.1278, 51.5074], type: 'gold' },
         { name: 'TAIWAN - First Time Surfing', coords: [120.9605, 23.6978], type: 'gold' },
-        { name: 'DOLOMITES - Best Ski Weather', coords: [11.7049, 46.5598], type: 'gold' },
-        { name: 'THUNDER RIDGE - First Ski Spot', coords: [-73.5818, 41.5081], type: 'gold' },
+        { name: 'DOLOMITES - Favorite Groomed Skiing', coords: [11.7049, 46.5598], type: 'gold' },
+        { name: 'THUNDER RIDGE - First Ski Hill', coords: [-73.5818, 41.5081], type: 'gold' },
         { name: 'KIPAWA - 22 Day Canoe Trip', coords: [-78.9667, 46.9667], type: 'gold' }
     ];
 
