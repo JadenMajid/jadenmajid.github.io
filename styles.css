@@ -113,6 +113,15 @@ body {
     color: var(--win-bg);
 }
 
+.desktop-icon:focus-visible,
+.os-btn:focus-visible,
+.start-btn:focus-visible,
+.task-item:focus-visible,
+.title-bar-controls button:focus-visible {
+    outline: 2px solid #ffff00;
+    outline-offset: 2px;
+}
+
 /* Windows */
 .os-container {
     width: 100%;
@@ -567,6 +576,17 @@ body {
     border-left: 2px solid var(--win-border-dark);
     border-right: 2px solid var(--win-border-light);
     border-bottom: 2px solid var(--win-border-light);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
 }
 
 /* Maximized Window Modifier */

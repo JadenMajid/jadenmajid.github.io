@@ -3,6 +3,14 @@ const taskbarTimeEl = document.querySelector(".taskbar-time");
 const windowElements = Array.from(document.querySelectorAll(".os-window"));
 const taskElements = Array.from(document.querySelectorAll(".task-item"));
 
+document.querySelectorAll(".desktop-icon, .task-item, .start-btn").forEach((control) => {
+  control.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    event.preventDefault();
+    control.click();
+  });
+});
+
 function taskIdFromWindowId(windowId) {
   return "task-" + windowId.replace("win-", "");
 }

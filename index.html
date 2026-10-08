@@ -5,6 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jaden Majid - Portfolio</title>
+    <meta name="description"
+        content="Jaden Majid is a UBC computer science student building software engineering and machine learning projects.">
+    <link rel="canonical" href="https://jmajid.com/">
+    <meta property="og:title" content="Jaden Majid - Portfolio">
+    <meta property="og:description"
+        content="UBC computer science student building software engineering and machine learning projects.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jmajid.com/">
+    <meta property="og:image" content="https://jmajid.com/images/websitepreview.png">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" type="image/png" href="images/icon128.png">
     <link rel="stylesheet" href="styles.css">
     <!-- Google tag (gtag.js) -->
@@ -23,32 +33,33 @@
 
     <!-- Desktop Icons -->
     <div class="desktop-icons">
-        <div class="desktop-icon" onclick="toggleWindow('win-profile')">
+        <div class="desktop-icon" role="button" tabindex="0" aria-label="Open profile" onclick="toggleWindow('win-profile')">
             <div class="icon-img">📔</div>
             <span>profile.exe</span>
         </div>
-        <div class="desktop-icon" onclick="toggleWindow('win-coursework')">
+        <div class="desktop-icon" role="button" tabindex="0" aria-label="Open coursework" onclick="toggleWindow('win-coursework')">
             <div class="icon-img">🗄️</div>
             <span>coursework.db</span>
         </div>
-        <div class="desktop-icon" onclick="toggleWindow('win-projects')">
+        <div class="desktop-icon" role="button" tabindex="0" aria-label="Open projects" onclick="toggleWindow('win-projects')">
             <div class="icon-img">📁</div>
             <span>projects-folder</span>
         </div>
-        <div class="desktop-icon" onclick="toggleWindow('win-experiences')">
+        <div class="desktop-icon" role="button" tabindex="0" aria-label="Open experiences" onclick="toggleWindow('win-experiences')">
             <div class="icon-img">💼</div>
             <span>experiences.rtf</span>
         </div>
-        <div class="desktop-icon" onclick="toggleWindow('win-map')">
+        <div class="desktop-icon" role="button" tabindex="0" aria-label="Open travel map" onclick="toggleWindow('win-map')">
             <div class="icon-img">🗺️</div>
             <span>map.exe</span>
         </div>
-        <div class="desktop-icon"
+        <div class="desktop-icon" role="button" tabindex="0" aria-label="Open CV"
             onclick="window.open('https://jmajid.com/pdfs/JadenMajid_CV_2026_03_19.pdf', '_blank', 'noopener,noreferrer')">
             <div class="icon-img">📘</div>
             <span>cv_final_final.pdf</span>
         </div>
-        <div class="desktop-icon" onclick="window.open('https://jadenmajid.substack.com/', '_blank', 'noopener,noreferrer')">
+        <div class="desktop-icon" role="button" tabindex="0" aria-label="Open blog"
+            onclick="window.open('https://jadenmajid.substack.com/', '_blank', 'noopener,noreferrer')">
             <div class="icon-img">📝</div>
             <span>blog.url</span>
         </div>
@@ -70,7 +81,7 @@
                 <h1 class="pixel-text large">JADEN MAJID</h1>
                 <br>
                 <br>
-                <p>I'm a computer science major at UBC Vancouver graduating Dec. 2026. I'm interested in SWE and Machine Learning / AI.</p>
+                <p>I'm a computer science student at UBC Vancouver graduating in December 2026. I build software engineering and machine learning systems, and I'm open to SWE and ML/AI opportunities.</p>
                 <br>
                 <br>
                 <div class="field-row">
@@ -169,7 +180,7 @@
                         <div class="tree-item">|-- CPSC 310: Software Engineering</div>
                         <br>
                         <div class="tree-title">[-] MISC</div>
-                        <div class="tree-item">|-- CHEM 100: Founations of Chem.</div>
+                        <div class="tree-item">|-- CHEM 100: Foundations of Chem.</div>
                         <div class="tree-item">|-- MATH 100, 101, 200: Calc. I, II, III</div>
                         <div class="tree-item">|-- MATH 215: ODEs</div>
                         <div class="tree-item">|-- MATH 221: Lin. Alg.</div>
@@ -401,21 +412,21 @@
 
     <!-- Taskbar -->
     <div class="taskbar">
-        <div class="start-btn" onclick="minWindow('all')">
+        <div class="start-btn" role="button" tabindex="0" aria-label="Minimize all windows" onclick="minWindow('all')">
             <img src="data:image/svg+xml;utf8,<svg width='16' height='16' xmlns='http://www.w3.org/2000/svg'><rect width='7' height='7' fill='%238b0000'/><rect x='8' width='7' height='7' fill='%2322cc22'/><rect y='8' width='7' height='7' fill='%234b0082'/><rect x='8' y='8' width='7' height='7' fill='%23daa520'/></svg>"
                 alt="Start" style="margin-right: 5px;">
             START
         </div>
         <div class="taskbar-tasks">
-            <div class="task-item active" id="task-profile" onclick="toggleWindow('win-profile')"
-                style="display:block;">Profile.txt</div>
-            <div class="task-item" id="task-coursework" onclick="toggleWindow('win-coursework')" style="display:none;">
+            <div class="task-item active" role="button" tabindex="0" id="task-profile" onclick="toggleWindow('win-profile')"
+                style="display:block;">profile.exe</div>
+            <div class="task-item" role="button" tabindex="0" id="task-coursework" onclick="toggleWindow('win-coursework')" style="display:none;">
                 Coursework.db</div>
-            <div class="task-item" id="task-projects" onclick="toggleWindow('win-projects')" style="display:none;">
+            <div class="task-item" role="button" tabindex="0" id="task-projects" onclick="toggleWindow('win-projects')" style="display:none;">
                 Projects_Folder</div>
-            <div class="task-item" id="task-experiences" onclick="toggleWindow('win-experiences')"
+            <div class="task-item" role="button" tabindex="0" id="task-experiences" onclick="toggleWindow('win-experiences')"
                 style="display:none;">Experiences.rtf</div>
-            <div class="task-item active" id="task-map" onclick="toggleWindow('win-map')" style="display:block;">Map.exe
+            <div class="task-item active" role="button" tabindex="0" id="task-map" onclick="toggleWindow('win-map')" style="display:block;">Map.exe
             </div>
         </div>
         <div class="taskbar-time">1:33 PM</div>

@@ -1,0 +1,206 @@
+%-------------------------
+% Resume in Latex
+% Author : Matty
+% Based on: https://github.com/jakegut/resume
+% License : MIT
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{xcolor}
+\usepackage{fontawesome5}
+\usepackage[colorlinks=true, linkcolor=blue]{hyperref}
+\usepackage{ragged2e}
+
+\input{glyphtounicode}
+
+% -------------------- SPACING PARAMETERS --------------------
+\newcommand{\sectionspace}{-4pt}        
+\newcommand{\itemspace}{-1pt}           
+\newcommand{\subheadinglinespace}{-7pt} 
+\newcommand{\listspace}{0pt}           
+\newcommand{\headerspace}{-20pt}        
+
+% -------------------- FONT PARAMETERS --------------------
+\newcommand{\datefont}[1]{{\small #1}} % Global control for date sizing
+
+\pagestyle{fancy}
+\fancyhf{} 
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\usepackage[left=0.35in, right=0.4in, top=.3in, bottom=0in]{geometry}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% -------------------- FORMATTING --------------------
+\titleformat{\section}{
+  \vspace{2pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{\sectionspace}]
+
+\pdfgentounicode=1
+
+% -------------------- CUSTOM COMMANDS --------------------
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeEducationHeading}[4]{
+  \vspace{\itemspace}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & \datefont{#2} \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{\subheadinglinespace}
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{\itemspace}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} \textbar\enspace\textit{\small#3} \textbar\enspace\textit{\small #4} & \datefont{#2} \\
+    \end{tabular*}\vspace{\subheadinglinespace}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \vspace{\itemspace}
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & \datefont{#2} \\
+    \end{tabular*}\vspace{\subheadinglinespace}
+}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\vspace{\listspace}\end{itemize}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\setlength{\footskip}{4.08003pt}
+
+% -------------------- START OF DOCUMENT --------------------
+\begin{document}
+
+% -------------------- HEADING --------------------
+\begin{center}
+    \textbf{\Huge \scshape Jaden Majid} \\ \vspace{2pt}
+    \small 
+    \faIcon{github} \href{https://github.com/JadenMajid}{\underline{github.com/JadenMajid}} \quad
+    \faIcon{code} \href{https://www.jmajid.com}{\underline{jmajid.com}} \quad
+    \faIcon{linkedin} \href{https://linkedin.com/in/JadenMajid}{\underline{linkedin.com/in/jaden-majid}} \quad
+    \faIcon{envelope} \href{mailto:majid.jaden@gmail.com}{\underline{majid.jaden@gmail.com}}
+\end{center}
+
+\justify{
+Computer Science student at the University of British Columbia with experience building software systems, machine learning models, and developer tooling. Strong foundation in Python, C, Rust, and TypeScript, with a focus on reliable implementation, performance, and measurable operational impact.
+}
+
+\vspace{-12pt}
+
+% -------------------- EXPERIENCE --------------------
+\section{Experience}
+\resumeSubHeadingListStart
+    \resumeSubheading
+      {Technology and Digital Intern}{Sept. 2024 -- July 2025}
+      {Disneyland}{Hong Kong}
+      \resumeItemListStart
+        \resumeItem{Re-engineered database interface jobs from legacy batch processes in PowerShell, achieving 12.5x faster execution.}
+        \resumeItem{Reduced data interface project cost by 95\% compared to a previously submitted third party quote.}
+        \resumeItem{Automated over 1,100 work-hours per year of previously manual workflows for cross-functional operations teams.}
+        \resumeItem{Developed and maintained a full-stack application that digitized record-keeping and automated security incident analysis.}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Digital Consulting Intern}{July 2024 -- Aug. 2024}
+      {Deloitte}{Hong Kong}
+      \resumeItemListStart
+        \resumeItem{Developed Python scripts to generate synthetic test data, improving QA efficiency for marketing deployments.}
+        \resumeItem{Owned a project feature from planning through client acceptance, reducing implementation cost by 80\%.}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Teaching Assistant}{May 2023 -- Apr. 2024}
+      {UBC Physics Department}{Vancouver, BC}
+      \resumeItemListStart
+        \resumeItem{Facilitated lab sessions and lectures for 100+ students, debugging numerical simulations and grading assignments.}
+      \resumeItemListEnd
+\resumeSubHeadingListEnd
+\vspace{-0.25in}
+% -------------------- PROJECTS --------------------
+\section{Personal Projects}
+    \resumeSubHeadingListStart
+        \resumeProjectHeading
+        {\textbf{\href{https://github.com/JadenMajid/gan-upscaler}{Super Resolution GAN Image Upscaler}} $|$ \footnotesize\emph{Python, PyTorch}}{Jan. 2026 -- Ongoing}
+        \resumeItemListStart
+            \resumeItem{Engineered a generator-discriminator image-upscaling architecture using bottleneck residual blocks.}
+            \resumeItem{Implemented a discriminator without pre-trained VGG weights, maintaining stable, non-collapsing adversarial training.}
+            \resumeItem{Added a global skip connection that combines learned high-frequency residuals with a bicubic base image to improve convergence and output sharpness.}
+            \resumeItem{Built modular model components from PyTorch primitives to support efficient experimentation on available training hardware.}
+        \resumeItemListEnd
+
+        \resumeProjectHeading
+        {\textbf{\href{https://github.com/JadenMajid/mnist_ai}{MNIST in C}} $|$ \footnotesize\emph{C}}{Nov. 2025 -- Dec. 2025}
+        \resumeItemListStart
+            \resumeItem{Engineered a feed-forward neural network from first principles using only glibc, achieving 97\%+ test accuracy.}
+            \resumeItem{Implemented backpropagation and stochastic gradient descent from first principles with configurable layer topologies.}
+            \resumeItem{Built a unit-tested linear algebra library with general matrix multiplication (GEMM) and a custom serialization format.}
+            \resumeItem{Used pointers and manual memory management throughout the system, with zero leaks verified by Valgrind.}
+        \resumeItemListEnd
+        %\vspace{-0.15in}
+        \resumeProjectHeading
+        {\textbf{InsightUBC} $|$ \footnotesize\emph{TypeScript, Vite}}{Sept. 2025 -- Dec. 2025}
+        \resumeItemListStart
+            \resumeItem{Built a full-stack analytics platform for parsing and querying the UBC PAIR dataset through a custom JSON query protocol.}
+            \resumeItem{Implemented relational-algebra operations including selection, filtering, grouping, and aggregation.}
+            \resumeItem{Implemented a type-safe parser from a prescribed EBNF grammar, validating abstract syntax tree nodes during query construction.}
+        \resumeItemListEnd   
+
+        \resumeProjectHeading
+        {\textbf{\href{https://github.com/JadenMajid/wikipedia-scraper}{WikiScrape}} $|$ \footnotesize\emph{Rust, Python}}{Jan. 2025}
+        \resumeItemListStart
+            \resumeItem{Built a concurrent web crawler using Tokio and Reqwest to map Wikipedia articles as a directed graph.}
+            \resumeItem{Implemented an asynchronous worker pool that reached a burst throughput of 2,900 requests per second.}
+        \resumeItemListEnd    
+    \resumeSubHeadingListEnd
+\vspace{-24pt}
+% -------------------- SKILLS --------------------
+\section{Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Programming/Scripting Languages}{: Python, C, Rust, TypeScript} \\
+     \textbf{Libraries/Tools}{: NumPy, PyTorch, Matplotlib, Vim, Linux} \\
+     \textbf{Languages}{: Native English, Intermediate Chinese, Intermediate French}
+    }}
+ \end{itemize}
+
+\vspace{-24pt}
+
+% -------------------- EDUCATION --------------------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeEducationHeading
+      {The University of British Columbia}{Sept. 2021 -- Dec. 2026}
+      {B.Sc. Computer Science, Co-op Program}{Vancouver, Canada}
+    
+    \vspace{6pt}
+    \small{
+      \textbf{Relevant Courses:} Advanced Machine Learning, Software Engineering, Parallel Algorithms, Data Structures \& Algorithms
+    }
+  \resumeSubHeadingListEnd
+
+\end{document}
