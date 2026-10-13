@@ -3,6 +3,17 @@ const taskbarTimeEl = document.querySelector(".taskbar-time");
 const windowElements = Array.from(document.querySelectorAll(".os-window"));
 const taskElements = Array.from(document.querySelectorAll(".task-item"));
 
+// The desktop filename is the shared label for its window and taskbar entry.
+windowElements.forEach((win) => {
+  const icon = document.querySelector(`.desktop-icon[aria-controls="${win.id}"] span`);
+  if (!icon) return;
+  const name = icon.textContent.trim();
+  const title = win.querySelector(".title-bar-text");
+  const task = getTaskByWindowId(win.id);
+  if (title) title.textContent = name;
+  if (task) task.textContent = name;
+});
+
 document.querySelectorAll(".desktop-icon, .task-item, .start-btn").forEach((control) => {
   control.addEventListener("keydown", (event) => {
     if (event.key !== "Enter" && event.key !== " ") return;
@@ -28,7 +39,7 @@ function clearTaskActiveStates() {
 }
 
 // Clock
-setInterval(() => {
+function updateClock() {
   const d = new Date();
   let hours = d.getHours();
   let mins = d.getMinutes();
@@ -39,7 +50,9 @@ setInterval(() => {
   if (taskbarTimeEl) {
     taskbarTimeEl.innerText = hours + ":" + mins + " " + ampm;
   }
-}, 1000);
+}
+updateClock();
+setInterval(updateClock, 1000);
 
 // Window Manager
 let highestZ = 10;
@@ -61,12 +74,15 @@ function loadLazyMedia(container) {
 
       const fullImage = new Image();
       fullImage.decoding = "async";
-      fullImage.src = fullSrc;
       fullImage.onload = () => {
         img.setAttribute("src", fullSrc);
         img.style.filter = "none";
         img.dataset.upgraded = "true";
       };
+      fullImage.onerror = () => {
+        img.style.filter = "none";
+      };
+      fullImage.src = fullSrc;
     }
   });
 
@@ -183,46 +199,25 @@ function maxWindow(id) {
 }
 
 function isMobileViewport() {
-  return window.matchMedia("(max-width: 768px)").matches;
+  return window.matchMedia("(max-width: 1024px)").matches;
 }
 
 function setInitialWindowLayout() {
   if (isMobileViewport()) return;
 
   const profile = getWindowById("win-profile");
-  const map = getWindowById("win-map");
-  if (!profile || !map) return;
+  const projects = getWindowById("win-projects");
+  if (!profile || !projects) return;
 
-  const taskbarHeight = taskbarHeightPx();
-  const vw = window.innerWidth;
-  const vh = window.innerHeight - taskbarHeight;
-
-  const profileWidth = Math.min(460, Math.max(360, Math.floor(vw * 0.38)));
-  profile.style.width = profileWidth + "px";
-  profile.style.height = "auto";
-  profile.style.top = "96px";
-  profile.style.left =
-    Math.max(12, Math.floor(vw * 0.5) - profileWidth - 16) + "px";
-
-  const mapWidth = Math.min(640, Math.max(440, Math.floor(vw * 0.45)));
-  const mapHeight = Math.min(560, Math.max(380, Math.floor(vh * 0.62)));
-  map.style.width = mapWidth + "px";
-  map.style.height = mapHeight + "px";
-
-  const profileRect = profile.getBoundingClientRect();
-  const preferredLeft = Math.round(profileRect.right + 16);
-  const fitsRight = preferredLeft + mapWidth <= vw - 12;
-
-  if (fitsRight) {
-    map.style.left = preferredLeft + "px";
-    map.style.top = "96px";
-  } else {
-    map.style.left = Math.max(12, Math.floor((vw - mapWidth) / 2)) + "px";
-    map.style.top = Math.round(profileRect.bottom + 14) + "px";
-  }
-
-  clampWindowToViewport(profile);
-  clampWindowToViewport(map);
+  // Reset to the CSS startup layout, then constrain it to the usable desktop.
+  // CSS places the windows correctly even before this script or fonts load.
+  [profile, projects].forEach((win) => {
+    if (win.classList.contains("maximized")) return;
+    ["width", "height", "left", "top"].forEach((property) => {
+      win.style.removeProperty(property);
+    });
+    clampWindowToViewport(win);
+  });
 }
 
 function snapWindowToPixelGrid(win) {
@@ -278,7 +273,7 @@ function clampWindowToViewport(win) {
 }
 
 function addResizeHandles(win) {
-  if (!win || isMobileViewport()) return;
+  if (!win) return;
 
   const directions = ["n", "s", "e", "w", "ne", "nw", "se", "sw"];
   directions.forEach((direction) => {
@@ -288,7 +283,7 @@ function addResizeHandles(win) {
     win.appendChild(handle);
 
     handle.addEventListener("mousedown", function (e) {
-      if (win.classList.contains("maximized")) return;
+      if (isMobileViewport() || win.classList.contains("maximized")) return;
       e.preventDefault();
       e.stopPropagation();
       bringToFront(win.id);
@@ -424,7 +419,7 @@ windowElements.forEach((win) => {
   if (!titleBar) return;
 
   titleBar.addEventListener("mousedown", function (e) {
-    if (e.target.tagName === "BUTTON") return;
+    if (isMobileViewport() || e.target.tagName === "BUTTON") return;
     bringToFront(win.id);
     if (win.classList.contains("maximized")) return;
 
@@ -456,7 +451,11 @@ windowElements.forEach((win) => {
   };
 });
 
+let wasMobileViewport = isMobileViewport();
 window.addEventListener("resize", () => {
+  const mobile = isMobileViewport();
+  if (wasMobileViewport && !mobile) setInitialWindowLayout();
+  wasMobileViewport = mobile;
   windowElements.forEach((win) => {
     if (win.classList.contains("maximized")) {
       applyMaximizedBounds(win);
@@ -478,8 +477,16 @@ setInitialWindowLayout();
 if (isMobileViewport()) {
   minWindow("all");
 } else {
-  bringToFront("win-profile");
-  minWindow("win-map");
   bringToFront("win-projects");
+  bringToFront("win-profile");
 }
 windowElements.forEach(clampWindowToViewport);
+
+// Re-measure the profile after the local font loads so its content is not clipped.
+document.fonts.ready.then(() => {
+  const profile = getWindowById("win-profile");
+  if (!profile || isMobileViewport() || profile.classList.contains("maximized")) return;
+  profile.style.height = "auto";
+  profile.style.removeProperty("top");
+  clampWindowToViewport(profile);
+});

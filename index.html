@@ -33,34 +33,34 @@
 
     <!-- Desktop Icons -->
     <div class="desktop-icons">
-        <div class="desktop-icon" role="button" tabindex="0" aria-label="Open profile" onclick="toggleWindow('win-profile')">
-            <div class="icon-img">📔</div>
+        <div class="desktop-icon" role="button" tabindex="0" aria-label="Open profile" aria-controls="win-profile" onclick="toggleWindow('win-profile')">
+            <div class="icon-img" aria-hidden="true">📔</div>
             <span>profile.exe</span>
         </div>
-        <div class="desktop-icon" role="button" tabindex="0" aria-label="Open coursework" onclick="toggleWindow('win-coursework')">
-            <div class="icon-img">🗄️</div>
+        <div class="desktop-icon" role="button" tabindex="0" aria-label="Open coursework" aria-controls="win-coursework" onclick="toggleWindow('win-coursework')">
+            <div class="icon-img" aria-hidden="true">🗄️</div>
             <span>coursework.db</span>
         </div>
-        <div class="desktop-icon" role="button" tabindex="0" aria-label="Open projects" onclick="toggleWindow('win-projects')">
-            <div class="icon-img">📁</div>
+        <div class="desktop-icon" role="button" tabindex="0" aria-label="Open projects" aria-controls="win-projects" onclick="toggleWindow('win-projects')">
+            <div class="icon-img" aria-hidden="true">📁</div>
             <span>projects-folder</span>
         </div>
-        <div class="desktop-icon" role="button" tabindex="0" aria-label="Open experiences" onclick="toggleWindow('win-experiences')">
-            <div class="icon-img">💼</div>
-            <span>experiences.rtf</span>
+        <div class="desktop-icon" role="button" tabindex="0" aria-label="Open experience" aria-controls="win-experiences" onclick="toggleWindow('win-experiences')">
+            <div class="icon-img" aria-hidden="true">💼</div>
+            <span>experience.rtf</span>
         </div>
-        <div class="desktop-icon" role="button" tabindex="0" aria-label="Open travel map" onclick="toggleWindow('win-map')">
-            <div class="icon-img">🗺️</div>
+        <div class="desktop-icon" role="button" tabindex="0" aria-label="Open travel map" aria-controls="win-map" onclick="toggleWindow('win-map')">
+            <div class="icon-img" aria-hidden="true">🗺️</div>
             <span>map.exe</span>
         </div>
         <div class="desktop-icon" role="button" tabindex="0" aria-label="Open CV"
-            onclick="window.open('https://jmajid.com/pdfs/JadenMajid_CV_2026_03_19.pdf', '_blank', 'noopener,noreferrer')">
-            <div class="icon-img">📘</div>
+            onclick="window.open('pdfs/JadenMajid_CV_2026_03_19.pdf', '_blank', 'noopener,noreferrer')">
+            <div class="icon-img" aria-hidden="true">📘</div>
             <span>resume.pdf</span>
         </div>
         <div class="desktop-icon" role="button" tabindex="0" aria-label="Open blog"
             onclick="window.open('https://jadenmajid.substack.com/', '_blank', 'noopener,noreferrer')">
-            <div class="icon-img">📝</div>
+            <div class="icon-img" aria-hidden="true">📝</div>
             <span>blog.url</span>
         </div>
     </div>
@@ -68,7 +68,7 @@
     <div class="os-container">
 
         <!-- Profile Window -->
-        <div class="os-window" id="win-profile" style="width: 450px; top: 100px; left: calc(50vw - 460px);">
+        <div class="os-window" id="win-profile">
             <div class="title-bar">
                 <div class="title-bar-text">profile.exe</div>
                 <div class="title-bar-controls">
@@ -78,31 +78,28 @@
                 </div>
             </div>
             <div class="window-body">
-                <h1 class="pixel-text large">JADEN MAJID</h1>
-                <br>
-                <br>
-                <p>I'm a computer science student at UBC Vancouver graduating in December 2026. I build software engineering and machine learning systems, and I'm open to SWE and ML/AI opportunities.</p>
+                <p class="profile-eyebrow">Computer Science / UBC Vancouver</p>
+                <h1 class="pixel-text large">Jaden Majid</h1>
                 <div class="status-panel" aria-label="Current status">
                     <div class="status-line"><span>STATUS:</span> STUDENT</div>
                     <div class="status-line"><span>FOCUS:</span> SOFTWARE ENGINEERING + ML/AI</div>
                     <div class="status-line"><span>CURRENTLY:</span> CPSC 425 / AI 360 / FRST 303 / FREN 401 / BIOL 111</div>
                     <div class="status-line"><span>AVAILABLE:</span> DECEMBER 2026</div>
                 </div>
-                <p class="profile-meta">Currently studying AI, systems, forestry, French, and biology at UBC.</p>
-                <br>
+                <p class="profile-intro">I build software and machine learning systems, from neural networks in C to tools that simplify everyday work.</p>
                 <div class="field-row">
-                    <a href="https://github.com/JadenMajid" target="_blank" class="os-btn">GITHUB</a>
-                    <a href="mailto:jaden@jmajid.com" class="os-btn">EMAIL</a>
-                    <a href="https://www.linkedin.com/in/jaden-majid-603725214/" target="_blank"
-                        class="os-btn">LINKEDIN</a>
-                    <a href="https://jmajid.com/pdfs/JadenMajid_CV_2026_03_19.pdf" target="_blank" class="os-btn">DOWNLOAD CV</a>
+                    <a href="https://github.com/JadenMajid" target="_blank" rel="noopener noreferrer" class="os-btn">GitHub</a>
+                    <a href="mailto:jaden@jmajid.com" class="os-btn">Email me</a>
+                    <a href="https://www.linkedin.com/in/jaden-majid-603725214/" target="_blank" rel="noopener noreferrer"
+                        class="os-btn">LinkedIn</a>
+                    <a href="pdfs/JadenMajid_CV_2026_03_19.pdf" target="_blank" rel="noopener noreferrer" class="os-btn">Download CV</a>
                 </div>
                 <p class="last-updated">LAST UPDATED: OCTOBER 2026</p>
             </div>
         </div>
 
         <!-- Map Window -->
-        <div class="os-window" id="win-map" style="width: 640px; height: 520px; max-width: 90vw; top: 100px; left: calc(50vw + 10px);">
+        <div class="os-window" id="win-map" style="width: 640px; height: 520px; max-width: 90vw; top: 100px; left: calc(50vw + 10px); display: none;">
             <div class="title-bar">
                 <div class="title-bar-text">map.exe</div>
                 <div class="title-bar-controls">
@@ -135,7 +132,7 @@
                 <script src="vendor/topojson-client.min.js"></script>
                 <p class="pixel-text highlight-bg"
                     style="width: 100%; text-align: center; padding: 10px; margin-bottom: 5px; font-size: calc(1em - 3pt);">
-                    MY PATH<br>YOW -> CMB -> MNL -> NYC -> CVG -> YYZ -> MNL -> PVG -> YVR -> HKG -> YVR
+                    PLACES I'VE CALLED HOME<br>YOW -> CMB -> MNL -> NYC -> CVG -> YYZ -> MNL -> PVG -> YVR -> HKG -> YVR
                 </p>
             </div>
         </div>
@@ -160,17 +157,14 @@
                         <div class="tree-item">|-- FREN 401: Advanced French</div>
                         <div class="tree-item">|-- BIOL 111: Intro. to Modern Biology I</div>
                         <br>
-                        <div class="tree-title">[-] ML // AI</div>
+                        <div class="tree-title">[-] MACHINE LEARNING &amp; AI</div>
                         <div class="tree-item">|-- CPSC 322: Intro to AI</div>
                         <div class="tree-item">|-- CPSC 330: Applied ML</div>
                         <div class="tree-item">|-- CPSC 340: ML & Data Mining</div>
                         <div class="tree-item">|-- CPSC 440: Advanced ML</div>
                         <br>
-                        <div class="tree-title">[-] SYS // LOW LEVEL</div>
-                        <div class="tree-item">|-- CPSC 121: Models of<br>|
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            Computation</div>
+                        <div class="tree-title">[-] SYSTEMS</div>
+                        <div class="tree-item">|-- CPSC 121: Models of Computation</div>
                         <div class="tree-item">|-- CPSC 213: Intro to Systems</div>
                         <div class="tree-item">|-- CPSC 313: Hardware & OS</div>
                         <div class="tree-item">|-- CPSC 317: Networking</div>
@@ -179,13 +173,10 @@
                         <div class="tree-title">[-] ELECTIVES</div>
                         <div class="tree-item">|-- POLI 100: Intro to Politics</div>
                         <div class="tree-item">|-- SOCI 101: Intro to Sociology</div>
-                        <div class="tree-item">|-- FRST 304: Forestry &<br>|
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            Climate Change</div>
+                        <div class="tree-item">|-- FRST 304: Forestry &amp; Climate Change</div>
                     </div>
                     <div class="tree-view">
-                        <div class="tree-title">[-] DSA // SWE</div>
+                        <div class="tree-title">[-] ALGORITHMS &amp; SOFTWARE</div>
                         <div class="tree-item">|-- CPSC 110: Computation</div>
                         <div class="tree-item">|-- CPSC 221: DSA</div>
                         <div class="tree-item">|-- CPSC 320: Algorithm Design</div>
@@ -193,7 +184,7 @@
                         <div class="tree-item">|-- CPSC 304: Databases</div>
                         <div class="tree-item">|-- CPSC 310: Software Engineering</div>
                         <br>
-                        <div class="tree-title">[-] MISC</div>
+                        <div class="tree-title">[-] MATH &amp; SCIENCE</div>
                         <div class="tree-item">|-- CHEM 100: Foundations of Chem.</div>
                         <div class="tree-item">|-- MATH 100, 101, 200: Calc. I, II, III</div>
                         <div class="tree-item">|-- MATH 215: ODEs</div>
@@ -210,8 +201,7 @@
         </div>
 
         <!-- Projects Window -->
-        <div class="os-window" id="win-projects"
-            style="width: 800px; max-width: 90vw; height: 50vw; max-height: 600px; top: 120px; left: 190px; display: none;">
+        <div class="os-window" id="win-projects">
             <div class="title-bar">
                 <div class="title-bar-text">projects-folder</div>
                 <div class="title-bar-controls">
@@ -224,56 +214,36 @@
                 <div class="window-grid">
 
                     <div class="file-item">
-                        <video data-src="images/hq/ricing.mp4" data-lq-src="images/lq/ricing.mp4" class="pixel-img" autoplay muted loop playsinline preload="none"
-                            style="object-fit:cover;"></video>
-                        <div class="pad-content">
-                            <h3 class="pixel-text mid">Personal Ricing</h3>
-                            <p class="project-date">Ongoing</p>
-                            <div class="tech-tags">
-                                <span class="tech-tag">Linux</span>
-                                <span class="tech-tag">Hyprland</span>
-                                <span class="tech-tag">Dotfiles</span>
-                            </div>
-                            <p>Hyprland desktop setup intended to be minimal and frictionless.</p>
-                            <br><a href="https://github.com/JadenMajid/dotfiles" target="_blank"
-                                class="os-btn select-all">View</a>
-                        </div>
-                    </div>
-
-                    <div class="file-item">
                         <img data-src="images/hq/srgan.jpg" data-lq-src="images/lq/srgan.jpg" alt="ReSkayl" class="pixel-img" loading="lazy" decoding="async">
                         <div class="pad-content">
                             <h3 class="pixel-text mid">ReSkayl</h3>
-                            <p class="project-date">Ongoing</p>
+                            <p class="project-date">Jan–Mar 2026</p>
                             <div class="tech-tags">
                                 <span class="tech-tag">Python</span>
                                 <span class="tech-tag">PyTorch</span>
                                 <span class="tech-tag">CNN</span>
                             </div>
-                            <p>PyTorch SRGAN Upscaler architecture without VGG weights for stable training.</p>
-                            <p class="project-metric">Metric: stable, non-collapsing adversarial training</p>
-                            <br>
+                            <p>An image upscaler built with SRGAN in PyTorch, trained without pretrained VGG weights.</p>
                             <div class="field-row">
-                                <a href="https://github.com/JadenMajid/ReSkayl" target="_blank" class="os-btn">View Code</a>
+                                <a href="https://github.com/JadenMajid/ReSkayl" target="_blank" rel="noopener noreferrer" class="os-btn">View code</a>
                                 <!-- <a href="/blog/posts/gan-upscaler.html" class="os-btn">Blog Post</a> -->
                             </div>
                         </div>
                     </div>
 
                     <div class="file-item">
-                        <img data-src="images/hq/mnist_c.jpg" data-lq-src="images/lq/mnist_c.jpg" alt="NN in C" class="pixel-img" loading="lazy" decoding="async">
+                        <img data-src="images/hq/mnist_c.jpg" data-lq-src="images/lq/mnist_c.jpg" alt="Neural Network in C" class="pixel-img" loading="lazy" decoding="async">
                         <div class="pad-content">
-                            <h3 class="pixel-text mid">NN in C</h3>
+                            <h3 class="pixel-text mid">Neural Network in C</h3>
                             <p class="project-date">2024</p>
                             <div class="tech-tags">
                                 <span class="tech-tag">C</span>
                                 <span class="tech-tag">Neural Networks</span>
                                 <span class="tech-tag">MNIST</span>
                             </div>
-                            <p>Feed-forward neural net engineered from scratch, achieving 97%+ accuracy.</p>
-                            <p class="project-metric">Result: 97%+ MNIST test accuracy</p>
-                            <br><a href="https://github.com/JadenMajid/Neural-Network-in-C" target="_blank"
-                                class="os-btn select-all">View</a>
+                            <p>A neural network built from scratch in C, with over 97% accuracy on MNIST.</p>
+                            <a href="https://github.com/JadenMajid/Neural-Network-in-C" target="_blank" rel="noopener noreferrer"
+                                class="os-btn select-all">View code</a>
                         </div>
                     </div>
 
@@ -287,11 +257,9 @@
                                 <span class="tech-tag">Tokio</span>
                                 <span class="tech-tag">Web Crawling</span>
                             </div>
-                            <p>Multi-threaded Wikipedia crawler using Tokio mapping articles as a directed graph in
-                                Rust.</p>
-                            <p class="project-metric">Throughput: 2,900 requests/second burst</p>
-                            <br><a href="https://github.com/JadenMajid/wikipedia-scraper" target="_blank"
-                                class="os-btn select-all">View</a>
+                            <p>A concurrent Rust crawler that maps Wikipedia articles and links into a directed graph.</p>
+                            <a href="https://github.com/JadenMajid/wikipedia-scraper" target="_blank" rel="noopener noreferrer"
+                                class="os-btn select-all">View code</a>
                         </div>
                     </div>
 
@@ -306,27 +274,25 @@
                                 <span class="tech-tag">Procedural Graphics</span>
                                 <span class="tech-tag">Image Generation</span>
                             </div>
-                            <p>A Rust-based generator for producing high-resolution fractals using procedural
-                                techniques.</p>
-                            <br><a href="https://github.com/JadenMajid/fractal_generator" target="_blank"
-                                class="os-btn select-all">View</a>
+                            <p>High-resolution fractals generated in Rust.</p>
+                            <a href="https://github.com/JadenMajid/fractal_generator" target="_blank" rel="noopener noreferrer"
+                                class="os-btn select-all">View code</a>
                         </div>
                     </div>
 
                     <div class="file-item">
                         <img data-src="images/lq/phys210-updated.gif" data-lq-src="images/lq/phys210-updated.gif" alt="PHYS 210" class="pixel-img" loading="lazy" decoding="async">
                         <div class="pad-content">
-                            <h3 class="pixel-text mid">PHYS 210</h3>
+                            <h3 class="pixel-text mid">Physics Simulations</h3>
                             <p class="project-date">2023</p>
                             <div class="tech-tags">
                                 <span class="tech-tag">Python</span>
                                 <span class="tech-tag">NumPy</span>
                                 <span class="tech-tag">Simulation</span>
                             </div>
-                            <p>A collection of 5 physics simulations in Python with NumPy array broadcasting.</p>
-                            <p class="project-metric">Scope: 5 numerical physics simulations</p>
-                            <br><a href="https://github.com/JadenMajid/210-Projects" target="_blank"
-                                class="os-btn select-all">View</a>
+                            <p>Five computational physics simulations built with Python and NumPy.</p>
+                            <a href="https://github.com/JadenMajid/210-Projects" target="_blank" rel="noopener noreferrer"
+                                class="os-btn select-all">View code</a>
                         </div>
                     </div>
 
@@ -340,25 +306,42 @@
                                 <span class="tech-tag">Pygame</span>
                                 <span class="tech-tag">N-Body Simulation</span>
                             </div>
-                            <p>A Newtonian Gravity simulator to simulate n-body gravitation in Pygame.</p>
-                            <br><a href="https://github.com/JadenMajid/Gravity-Sim" target="_blank"
-                                class="os-btn select-all">View</a>
+                            <p>An interactive N-body simulation of Newtonian gravity, built with Pygame.</p>
+                            <a href="https://github.com/JadenMajid/Gravity-Sim" target="_blank" rel="noopener noreferrer"
+                                class="os-btn select-all">View code</a>
                         </div>
                     </div>
 
                     <div class="file-item">
                         <img data-src="images/hq/Sorting%20algorithm%20visualizer.gif" data-lq-src="images/lq/Sorting%20algorithm%20visualizer.gif" alt="Sorting" class="pixel-img" loading="lazy" decoding="async">
                         <div class="pad-content">
-                            <h3 class="pixel-text mid">Algo Visualizer</h3>
+                            <h3 class="pixel-text mid">Sorting Visualizer</h3>
                             <p class="project-date">2022</p>
                             <div class="tech-tags">
                                 <span class="tech-tag">Python</span>
                                 <span class="tech-tag">Pygame</span>
                                 <span class="tech-tag">DSA</span>
                             </div>
-                            <p>Creates a visual representation of 5 different sorting algorithms in Pygame.</p>
-                            <br><a href="https://github.com/JadenMajid/SortingAlgorithmVisualizer" target="_blank"
-                                class="os-btn select-all">View</a>
+                            <p>Five sorting algorithms visualized step by step in Pygame.</p>
+                            <a href="https://github.com/JadenMajid/SortingAlgorithmVisualizer" target="_blank" rel="noopener noreferrer"
+                                class="os-btn select-all">View code</a>
+                        </div>
+                    </div>
+
+                    <div class="file-item">
+                        <video data-src="images/hq/ricing.mp4" data-lq-src="images/lq/ricing.mp4" class="pixel-img" autoplay muted loop playsinline preload="none"
+                            style="object-fit:cover;"></video>
+                        <div class="pad-content">
+                            <h3 class="pixel-text mid">Linux Desktop</h3>
+                            <p class="project-date">Ongoing</p>
+                            <div class="tech-tags">
+                                <span class="tech-tag">Linux</span>
+                                <span class="tech-tag">Hyprland</span>
+                                <span class="tech-tag">Dotfiles</span>
+                            </div>
+                            <p>A minimal Hyprland desktop, configured for a smoother daily workflow.</p>
+                            <a href="https://github.com/JadenMajid/dotfiles" target="_blank" rel="noopener noreferrer"
+                                class="os-btn select-all">View code</a>
                         </div>
                     </div>
 
@@ -372,8 +355,8 @@
                                 <span class="tech-tag">Quantum Computing</span>
                                 <span class="tech-tag">Cryptography</span>
                             </div>
-                            <p>IB thesis about quantum computing and cryptography focusing on Shor's Algorithm.</p>
-                            <br><a href="/pdfs/EE.pdf" target="_blank" class="os-btn select-all">View PDF</a>
+                            <p>An IB extended essay on Shor's algorithm and its implications for cryptography.</p>
+                            <a href="/pdfs/EE.pdf" target="_blank" rel="noopener noreferrer" class="os-btn select-all">Read essay</a>
                         </div>
                     </div>
 
@@ -385,7 +368,7 @@
         <div class="os-window" id="win-experiences"
             style="width: 800px; top: 180px; left: 220px; max-height: 500px; display: none;">
             <div class="title-bar">
-                <div class="title-bar-text">experiences.rtf</div>
+                <div class="title-bar-text">experience.rtf</div>
                 <div class="title-bar-controls">
                     <button aria-label="Minimize" onclick="minWindow('win-experiences')">_</button>
                     <button aria-label="Maximize" data-max-btn onclick="maxWindow('win-experiences')">[]</button>
@@ -397,10 +380,8 @@
                     <img data-src="images/hq/HKDL.jpg" data-lq-src="images/lq/HKDL.jpg" alt="HKDL" loading="lazy" decoding="async">
                     <div>
                         <h3 class="pixel-text mid">Hong Kong Disneyland</h3>
-                        <p style="opacity: 0.8;">Tech & Digital Intern | SEP'24 - JUL'25</p><br>
-                        <p>Reduced data interface project cost by 95% compared to a third party quote. Automated over
-                            1,100 work-hours per year of manual operations workflows. Developed a full-stack system
-                            digitizing record-keeping and incident analysis.</p>
+                        <p class="experience-meta">Tech &amp; Digital Intern · Sep 2024 – Jul 2025</p>
+                        <p>Cut a data interface project’s cost by 95% against a third-party quote. Automated workflows saving over 1,100 hours a year, and built a full-stack system for record-keeping and incident analysis.</p>
                     </div>
                 </div>
 
@@ -408,18 +389,17 @@
                     <img data-src="images/hq/deloitte.jpg" data-lq-src="images/lq/deloitte.jpg" alt="Deloitte" loading="lazy" decoding="async">
                     <div>
                         <h3 class="pixel-text mid">Deloitte Digital</h3>
-                        <p style="opacity: 0.8;">Consulting Intern | JUL'24 - AUG'24</p><br>
-                        <p>Developed Python scripts for generating QA synthetic marketing data deployments. Managed
-                            lifecycle ownership of feature deployment, reducing tracking feature cost by 80%.</p>
+                        <p class="experience-meta">Consulting Intern · Jul – Aug 2024</p>
+                        <p>Built Python tools to generate synthetic marketing data for QA. Delivered a tracking feature from development through deployment, reducing its cost by 80%.</p>
                     </div>
                 </div>
 
                 <div class="exp-item" style="border-bottom: none;">
                     <img data-src="images/hq/ubclogo.jpg" data-lq-src="images/lq/ubclogo.jpg" alt="UBC Physics" loading="lazy" decoding="async">
                     <div>
-                        <h3 class="pixel-text mid">UBC Physics Dept</h3>
-                        <p style="opacity: 0.8;">Teaching Assistant | MAY'23 - APR'24</p><br>
-                        <p>Facilitated lecture and labs for 100+ students, debugging numerical python simulations.</p>
+                        <h3 class="pixel-text mid">UBC Physics</h3>
+                        <p class="experience-meta">Teaching Assistant · May 2023 – Apr 2024</p>
+                        <p>Supported over 100 students in lectures and labs, helping them build and debug numerical simulations in Python.</p>
                     </div>
                 </div>
 
@@ -432,22 +412,22 @@
     <div class="taskbar">
         <div class="start-btn" role="button" tabindex="0" aria-label="Minimize all windows" onclick="minWindow('all')">
             <img src="data:image/svg+xml;utf8,<svg width='16' height='16' xmlns='http://www.w3.org/2000/svg'><rect width='7' height='7' fill='%238b0000'/><rect x='8' width='7' height='7' fill='%2322cc22'/><rect y='8' width='7' height='7' fill='%234b0082'/><rect x='8' y='8' width='7' height='7' fill='%23daa520'/></svg>"
-                alt="Start" style="margin-right: 5px;">
-            START
+                alt="" style="margin-right: 5px;">
+            Desktop
         </div>
         <div class="taskbar-tasks">
             <div class="task-item active" role="button" tabindex="0" id="task-profile" onclick="toggleWindow('win-profile')"
                 style="display:block;">profile.exe</div>
             <div class="task-item" role="button" tabindex="0" id="task-coursework" onclick="toggleWindow('win-coursework')" style="display:none;">
-                Coursework.db</div>
-            <div class="task-item active" role="button" tabindex="0" id="task-projects" onclick="toggleWindow('win-projects')" style="display:block;">
-                Projects_Folder</div>
+                coursework.db</div>
+            <div class="task-item" role="button" tabindex="0" id="task-projects" onclick="toggleWindow('win-projects')" style="display:block;">
+                projects-folder</div>
             <div class="task-item" role="button" tabindex="0" id="task-experiences" onclick="toggleWindow('win-experiences')"
-                style="display:none;">Experiences.rtf</div>
-            <div class="task-item" role="button" tabindex="0" id="task-map" onclick="toggleWindow('win-map')" style="display:none;">Map.exe
+                style="display:none;">experience.rtf</div>
+            <div class="task-item" role="button" tabindex="0" id="task-map" onclick="toggleWindow('win-map')" style="display:none;">map.exe
             </div>
         </div>
-        <div class="taskbar-time">1:33 PM</div>
+        <div class="taskbar-time" aria-label="Local time"></div>
     </div>
 
     <script src="scripts/globe.js"></script>
