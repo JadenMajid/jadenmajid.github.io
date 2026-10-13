@@ -301,6 +301,40 @@ body {
     text-align: center;
 }
 
+.status-panel {
+    margin: 1.1rem 0 0.8rem;
+    padding: 0.65rem 0.75rem;
+    border: 2px solid var(--win-border-dark);
+    background: var(--desktop-bg);
+    color: var(--text-color);
+    font-size: 0.95em;
+    line-height: 1.35;
+}
+
+.status-line + .status-line {
+    margin-top: 0.2rem;
+}
+
+.status-line span {
+    color: #ffff00;
+}
+
+.profile-meta,
+.last-updated,
+.project-metric {
+    font-size: 0.9em;
+    opacity: 0.85;
+}
+
+.last-updated {
+    margin-top: 0.85rem;
+}
+
+.project-metric {
+    margin-top: 0.55rem;
+    color: #ffff00;
+}
+
 .pad-content {
     padding: 1rem;
 }

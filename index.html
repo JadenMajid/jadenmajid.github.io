@@ -56,7 +56,7 @@
         <div class="desktop-icon" role="button" tabindex="0" aria-label="Open CV"
             onclick="window.open('https://jmajid.com/pdfs/JadenMajid_CV_2026_03_19.pdf', '_blank', 'noopener,noreferrer')">
             <div class="icon-img">📘</div>
-            <span>cv_final_final.pdf</span>
+            <span>resume.pdf</span>
         </div>
         <div class="desktop-icon" role="button" tabindex="0" aria-label="Open blog"
             onclick="window.open('https://jadenmajid.substack.com/', '_blank', 'noopener,noreferrer')">
@@ -82,15 +82,22 @@
                 <br>
                 <br>
                 <p>I'm a computer science student at UBC Vancouver graduating in December 2026. I build software engineering and machine learning systems, and I'm open to SWE and ML/AI opportunities.</p>
-                <br>
+                <div class="status-panel" aria-label="Current status">
+                    <div class="status-line"><span>STATUS:</span> STUDENT</div>
+                    <div class="status-line"><span>FOCUS:</span> SOFTWARE ENGINEERING + ML/AI</div>
+                    <div class="status-line"><span>CURRENTLY:</span> CPSC 425 / AI 360 / FRST 303 / FREN 401 / BIOL 111</div>
+                    <div class="status-line"><span>AVAILABLE:</span> DECEMBER 2026</div>
+                </div>
+                <p class="profile-meta">Currently studying AI, systems, forestry, French, and biology at UBC.</p>
                 <br>
                 <div class="field-row">
                     <a href="https://github.com/JadenMajid" target="_blank" class="os-btn">GITHUB</a>
                     <a href="mailto:jaden@jmajid.com" class="os-btn">EMAIL</a>
                     <a href="https://www.linkedin.com/in/jaden-majid-603725214/" target="_blank"
                         class="os-btn">LINKEDIN</a>
-                    <a href="https://jmajid.com/pdfs/JadenMajid_CV_2026_03_19.pdf" target="_blank" class="os-btn">CV</a>
+                    <a href="https://jmajid.com/pdfs/JadenMajid_CV_2026_03_19.pdf" target="_blank" class="os-btn">DOWNLOAD CV</a>
                 </div>
+                <p class="last-updated">LAST UPDATED: OCTOBER 2026</p>
             </div>
         </div>
 
@@ -146,6 +153,13 @@
             <div class="window-body">
                 <div class="grid-2">
                     <div class="tree-view">
+                        <div class="tree-title">[-] CURRENT TERM</div>
+                        <div class="tree-item">|-- CPSC 425: Computer Vision</div>
+                        <div class="tree-item">|-- AI 360: Deep Learning</div>
+                        <div class="tree-item">|-- FRST 303: Into the Woods</div>
+                        <div class="tree-item">|-- FREN 401: Advanced French</div>
+                        <div class="tree-item">|-- BIOL 111: Intro. to Modern Biology I</div>
+                        <br>
                         <div class="tree-title">[-] ML // AI</div>
                         <div class="tree-item">|-- CPSC 322: Intro to AI</div>
                         <div class="tree-item">|-- CPSC 330: Applied ML</div>
@@ -237,6 +251,7 @@
                                 <span class="tech-tag">CNN</span>
                             </div>
                             <p>PyTorch SRGAN Upscaler architecture without VGG weights for stable training.</p>
+                            <p class="project-metric">Metric: stable, non-collapsing adversarial training</p>
                             <br>
                             <div class="field-row">
                                 <a href="https://github.com/JadenMajid/ReSkayl" target="_blank" class="os-btn">View Code</a>
@@ -256,6 +271,7 @@
                                 <span class="tech-tag">MNIST</span>
                             </div>
                             <p>Feed-forward neural net engineered from scratch, achieving 97%+ accuracy.</p>
+                            <p class="project-metric">Result: 97%+ MNIST test accuracy</p>
                             <br><a href="https://github.com/JadenMajid/Neural-Network-in-C" target="_blank"
                                 class="os-btn select-all">View</a>
                         </div>
@@ -273,6 +289,7 @@
                             </div>
                             <p>Multi-threaded Wikipedia crawler using Tokio mapping articles as a directed graph in
                                 Rust.</p>
+                            <p class="project-metric">Throughput: 2,900 requests/second burst</p>
                             <br><a href="https://github.com/JadenMajid/wikipedia-scraper" target="_blank"
                                 class="os-btn select-all">View</a>
                         </div>
@@ -307,6 +324,7 @@
                                 <span class="tech-tag">Simulation</span>
                             </div>
                             <p>A collection of 5 physics simulations in Python with NumPy array broadcasting.</p>
+                            <p class="project-metric">Scope: 5 numerical physics simulations</p>
                             <br><a href="https://github.com/JadenMajid/210-Projects" target="_blank"
                                 class="os-btn select-all">View</a>
                         </div>
@@ -422,11 +440,11 @@
                 style="display:block;">profile.exe</div>
             <div class="task-item" role="button" tabindex="0" id="task-coursework" onclick="toggleWindow('win-coursework')" style="display:none;">
                 Coursework.db</div>
-            <div class="task-item" role="button" tabindex="0" id="task-projects" onclick="toggleWindow('win-projects')" style="display:none;">
+            <div class="task-item active" role="button" tabindex="0" id="task-projects" onclick="toggleWindow('win-projects')" style="display:block;">
                 Projects_Folder</div>
             <div class="task-item" role="button" tabindex="0" id="task-experiences" onclick="toggleWindow('win-experiences')"
                 style="display:none;">Experiences.rtf</div>
-            <div class="task-item active" role="button" tabindex="0" id="task-map" onclick="toggleWindow('win-map')" style="display:block;">Map.exe
+            <div class="task-item" role="button" tabindex="0" id="task-map" onclick="toggleWindow('win-map')" style="display:none;">Map.exe
             </div>
         </div>
         <div class="taskbar-time">1:33 PM</div>

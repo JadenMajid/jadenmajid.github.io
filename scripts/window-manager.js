@@ -479,6 +479,7 @@ if (isMobileViewport()) {
   minWindow("all");
 } else {
   bringToFront("win-profile");
-  bringToFront("win-map");
+  minWindow("win-map");
+  bringToFront("win-projects");
 }
 windowElements.forEach(clampWindowToViewport);
