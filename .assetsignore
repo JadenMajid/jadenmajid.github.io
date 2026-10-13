@@ -1,0 +1,17 @@
+# Wrangler serves this repository as a static site. Exclude repository metadata
+# and local tooling from the uploaded assets.
+.git/**
+.github/**
+.wrangler/**
+node_modules/**
+.DS_Store
+**/.DS_Store
+.gitignore
+.gitattributes
+*.code-workspace
+
+# Original media and these oversized GIFs exceed Workers' 25 MiB asset limit.
+# The physics preview uses images/lq/phys210-updated.gif instead.
+images/originals/**
+images/phys210.gif
+images/hq/phys210-updated.gif
